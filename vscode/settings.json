@@ -1,0 +1,158 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "markdown": "html"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "gitlens.codeLens.symbolScopes": ["!Module"],
+    "editor.wordBasedSuggestions": false
+  },
+  "dart.debugSdkLibraries": true,
+  "editor.formatOnSave": true,
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "typescript.autoClosingTags": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "fortran.provideCompletion": false,
+  "fortran.provideSymbols": false,
+  "editor.linkedEditing": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "python.languageServer": "Pylance",
+  "editor.fontSize": 16,
+  "files.defaultLanguage": "${activeEditorLanguage}",
+  "workbench.startupEditor": "none",
+  "code-runner.saveFileBeforeRun": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "cSpell.userWords": [
+    "Barbhuiya",
+    "deepcode",
+    "esversion",
+    "Hussain",
+    "Imran",
+    "imranbarbhuiya",
+    "keyspace",
+    "lngs",
+    "mehrin",
+    "Middlewares",
+    "nextjs",
+    "nocheck",
+    "nodownload",
+    "onhover",
+    "parbez",
+    "paren",
+    "parens",
+    "Pentester",
+    "preconnect",
+    "Webdeveloper"
+  ],
+  "cSpell.showAutocompleteSuggestions": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "python.formatting.autopep8Args": [
+    "--max-line-length",
+    "120",
+    "--experimental"
+  ],
+  "python.formatting.yapfArgs": [
+    "--style",
+    "{based_on_style: chromium, indent_width: 20}"
+  ],
+  "python.formatting.blackArgs": ["--line-length", "100"],
+  "python.formatting.provider": "black",
+  "code-runner.runInTerminal": true,
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.fileDirectoryAsCwd": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "discord.detailsEditing": "Editing {file_name} | {file_size}",
+  "redhat.telemetry.enabled": true,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "git.autofetch": true,
+  "files.associations": {
+    "*.html": "html"
+  },
+  "[html]": {
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"],
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "liveServer.settings.donotVerifyTags": true,
+  "discord.largeImage": "Editing a {lang} file",
+  "git.enableCommitSigning": true,
+  "gitlens.defaultDateFormat": null,
+  "workbench.colorTheme": "Dracula",
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": true,
+    "python": true
+  },
+  "markdownlint.config": {
+    "MD033": false,
+    "MD041": false
+  },
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "SECURITY",
+    "PRODUCTION"
+  ],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "foreground": "#000000",
+      "background": "#ffd700"
+    },
+    "SECURITY": {
+      "foreground": "#000000",
+      "background": "#ff0000",
+      "icon": "alert",
+      "iconColor": "red"
+    },
+    "PRODUCTION": {
+      "foreground": "#000000",
+      "background": "#00ff00",
+      "icon": "check",
+      "iconColor": "green"
+    }
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "fortran.provideHover": false,
+  "remoteHub.commitDirectlyWarning": "off",
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "editor.accessibilitySupport": "off",
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust"
+  },
+  "prettier.singleQuote": true,
+  "window.zoomLevel": 1,
+  "readable.enableAutoComplete": false,
+  "remote.SSH.remotePlatform": {
+    "139.59.26.139": "linux"
+  }
+}

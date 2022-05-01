@@ -71,37 +71,6 @@ Function Set-Favware-Location {
 	}
 }
 
-Function Set-Wlis-Location {
-	[CmdletBinding()]
-	Param (
-		[Parameter(Mandatory = $False, ValueFromRemainingArguments = $True)]
-		[string]
-		$Repo
-	)
-
-	Process {
-		if ($null -eq $Repo) {
-			$Repo = "wlis"
-		}
-
-		switch -regex ($Repo) {
-			"^(?:wlis|main)" {
-				Set-Location -Path "C:\Users\j.claassens\Documents\workspace\wlis"
-			}
-			'secondary' {
-				Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisSecondary'
-			}
-			'tertiary' {
-				Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisTertiary'
-			}
-			Default {
-				Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlis'
-			}
-		}
-	}
-}
-
-
 Function x {
 	exit;
 }
@@ -135,4 +104,8 @@ Function sd {
 
 Function Docker-Compose-Alias {
 	docker compose @Args
+}
+
+Function Ruby-Tunnel {
+	cloudflared tunnel run ruby
 }

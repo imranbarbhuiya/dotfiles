@@ -1,0 +1,42 @@
+command_timeout = 1000
+
+[aws]
+format = ""
+
+[directory]
+truncate_to_repo = false
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+
+[nodejs]
+disabled = true
+
+[line_break]
+disabled = false
+
+[time]
+disabled = false
+format = '🕙[ $time ]($style)'
+time_format = "%R"
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇡${ahead_count} ⇣${behind_count}"
+behind = "⇣${count}"
+conflicted = "[🤪${count}](bright-red) "
+untracked = "🤷‍${count} "
+stashed = "[📦 ${count}](bright-blue) "
+modified = "[📒${count}](yellow) "
+staged = "[✔${count}](green) "
+renamed = "[🚗${count}](bright-red) "
+deleted = "[🗑${count}](red) "
+
+[git_commit]
+only_detached = false
+
+[java]
+disabled = true
+
+[package]
+disabled = true

@@ -56,8 +56,9 @@ Function Build-Trigger {
 
         $Flags | ForEach-Object {
             switch ($_) {
-                'all-tests' { $BaseMessage += ' #RUN_ALL_TESTS' }
+                'all-tests' { $BaseMessage += ' #RUN_IT #RUN_TESTCAFE' }
                 'all' { $BaseMessage += ' #RUN_ALL' }
+                'bds' { $BaseMessage += ' #RUN_BDS' }
                 'docu' { $BaseMessage += ' #DOCU' }
                 'it' { $BaseMessage += ' #RUN_IT' }
                 'order' { $BaseMessage += ' #RUN_GMS_ORMAS' }
@@ -70,6 +71,39 @@ Function Build-Trigger {
         }
 
         git cie -m "$BaseMessage"
+    }
+}
+
+Function Set-Wlis-Location {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory = $False, ValueFromRemainingArguments = $True)]
+        [string]
+        $Repo
+    )
+
+    Process {
+        if ($null -eq $Repo) {
+            $Repo = 'wlis'
+        }
+
+        switch -regex ($Repo) {
+            '^(?:wlis|main)' {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlis'
+            }
+            'secondary' {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisSecondary'
+            }
+            'tertiary' {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisTertiary'
+            }
+            'quaterniary' {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisQuaterniary'
+            }
+            Default {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlis'
+            }
+        }
     }
 }
 

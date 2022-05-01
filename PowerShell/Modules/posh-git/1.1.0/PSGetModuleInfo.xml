@@ -1,0 +1,190 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">posh-git</S>
+      <Version N="Version">1.1.0</Version>
+      <S N="Type">Module</S>
+      <S N="Description">Provides prompt with Git status summary information and tab completion for Git commands, parameters, remotes and branch names.</S>
+      <S N="Author">Keith Dahlby Keith Hill and contributors</S>
+      <Obj N="CompanyName" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>LeoColomb</S>
+          <S>dahlbyk</S>
+        </LST>
+      </Obj>
+      <S N="Copyright">(c) 2010-2021 Keith Dahlby, Keith Hill, and contributors</S>
+      <DT N="PublishedDate">2022-03-31T15:51:47+05:30</DT>
+      <Obj N="InstalledDate" RefId="2">
+        <DT>2022-05-01T10:02:46.1289532+05:30</DT>
+        <MS>
+          <Obj N="DisplayHint" RefId="3">
+            <TN RefId="2">
+              <T>Microsoft.PowerShell.Commands.DisplayHintType</T>
+              <T>System.Enum</T>
+              <T>System.ValueType</T>
+              <T>System.Object</T>
+            </TN>
+            <ToString>DateTime</ToString>
+            <I32>2</I32>
+          </Obj>
+        </MS>
+      </Obj>
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/dahlbyk/posh-git/blob/v1.1.0/LICENSE.txt</URI>
+      <URI N="ProjectUri">https://github.com/dahlbyk/posh-git</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="4">
+        <TNRef RefId="1" />
+        <LST>
+          <S>git</S>
+          <S>prompt</S>
+          <S>tab</S>
+          <S>tab-completion</S>
+          <S>tab-expansion</S>
+          <S>tabexpansion</S>
+          <S>PSEdition_Core</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="5">
+        <TN RefId="3">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Add-PoshGitToProfile</S>
+                <S>Expand-GitCommand</S>
+                <S>Format-GitBranchName</S>
+                <S>Get-GitBranchStatusColor</S>
+                <S>Get-GitStatus</S>
+                <S>Get-GitDirectory</S>
+                <S>Get-PromptConnectionInfo</S>
+                <S>Get-PromptPath</S>
+                <S>New-GitPromptSettings</S>
+                <S>Remove-GitBranch</S>
+                <S>Remove-PoshGitFromProfile</S>
+                <S>Update-AllBranches</S>
+                <S>Write-GitStatus</S>
+                <S>Write-GitBranchName</S>
+                <S>Write-GitBranchStatus</S>
+                <S>Write-GitIndexStatus</S>
+                <S>Write-GitStashCount</S>
+                <S>Write-GitWorkingDirStatus</S>
+                <S>Write-GitWorkingDirStatusSummary</S>
+                <S>Write-Prompt</S>
+                <S>Write-VcsStatus</S>
+                <S>TabExpansion</S>
+                <S>tgit</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="8">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Add-PoshGitToProfile</S>
+                <S>Expand-GitCommand</S>
+                <S>Format-GitBranchName</S>
+                <S>Get-GitBranchStatusColor</S>
+                <S>Get-GitStatus</S>
+                <S>Get-GitDirectory</S>
+                <S>Get-PromptConnectionInfo</S>
+                <S>Get-PromptPath</S>
+                <S>New-GitPromptSettings</S>
+                <S>Remove-GitBranch</S>
+                <S>Remove-PoshGitFromProfile</S>
+                <S>Update-AllBranches</S>
+                <S>Write-GitStatus</S>
+                <S>Write-GitBranchName</S>
+                <S>Write-GitBranchStatus</S>
+                <S>Write-GitIndexStatus</S>
+                <S>Write-GitStashCount</S>
+                <S>Write-GitWorkingDirStatus</S>
+                <S>Write-GitWorkingDirStatusSummary</S>
+                <S>Write-Prompt</S>
+                <S>Write-VcsStatus</S>
+                <S>TabExpansion</S>
+                <S>tgit</S>
+              </LST>
+            </Obj>
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">https://github.com/dahlbyk/posh-git/blob/v1.1.0/CHANGELOG.md</S>
+      <Obj N="Dependencies" RefId="9">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="10">
+        <TN RefId="4">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">(c) 2010-2021 Keith Dahlby, Keith Hill, and contributors</S>
+          <S N="description">Provides prompt with Git status summary information and tab completion for Git commands, parameters, remotes and branch names.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">https://github.com/dahlbyk/posh-git/blob/v1.1.0/CHANGELOG.md</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">35864</S>
+          <S N="downloadCount">1124852</S>
+          <S N="packageSize">45348</S>
+          <S N="published">31-03-2022 15:51:47 +05:30</S>
+          <S N="created">31-03-2022 15:51:47 +05:30</S>
+          <S N="lastUpdated">01-05-2022 04:31:18 +05:30</S>
+          <S N="tags">git prompt tab tab-completion tab-expansion tabexpansion PSEdition_Core PSModule PSFunction_Add-PoshGitToProfile PSCommand_Add-PoshGitToProfile PSFunction_Expand-GitCommand PSCommand_Expand-GitCommand PSFunction_Format-GitBranchName PSCommand_Format-GitBranchName PSFunction_Get-GitBranchStatusColor PSCommand_Get-GitBranchStatusColor PSFunction_Get-GitStatus PSCommand_Get-GitStatus PSFunction_Get-GitDirectory PSCommand_Get-GitDirectory PSFunction_Get-PromptConnectionInfo PSCommand_Get-PromptConnectionInfo PSFunction_Get-PromptPath PSCommand_Get-PromptPath PSFunction_New-GitPromptSettings PSCommand_New-GitPromptSettings PSFunction_Remove-GitBranch PSCommand_Remove-GitBranch PSFunction_Remove-PoshGitFromProfile PSCommand_Remove-PoshGitFromProfile PSFunction_Update-AllBranches PSCommand_Update-AllBranches PSFunction_Write-GitStatus PSCommand_Write-GitStatus PSFunction_Write-GitBranchName PSCommand_Write-GitBranchName PSFunction_Write-GitBranchStatus PSCommand_Write-GitBranchStatus PSFunction_Write-GitIndexStatus PSCommand_Write-GitIndexStatus PSFunction_Write-GitStashCount PSCommand_Write-GitStashCount PSFunction_Write-GitWorkingDirStatus PSCommand_Write-GitWorkingDirStatus PSFunction_Write-GitWorkingDirStatusSummary PSCommand_Write-GitWorkingDirStatusSummary PSFunction_Write-Prompt PSCommand_Write-Prompt PSFunction_Write-VcsStatus PSCommand_Write-VcsStatus PSFunction_TabExpansion PSCommand_TabExpansion PSFunction_tgit PSCommand_tgit PSIncludes_Function</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2022-05-01T04:31:18Z</S>
+          <S N="NormalizedVersion">1.1.0</S>
+          <S N="Authors">Keith Dahlby Keith Hill and contributors</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">posh-git.nuspec|AnsiUtils.ps1|CheckRequirements.ps1|ConsoleMode.ps1|GitParamTabExpansion.ps1|GitPrompt.ps1|GitTabExpansion.ps1|GitUtils.ps1|posh-git.psd1|posh-git.psm1|PoshGitTypes.ps1|TortoiseGit.ps1|Utils.ps1|WindowTitle.ps1|en-US\about_posh-git.help.txt</S>
+          <S N="GUID">74c9fd30-734b-4c89-a8ae-7727ad21d1d5</S>
+          <S N="PowerShellVersion">5.0</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\MAHRIN\Documents\PowerShell\Modules\posh-git\1.1.0</S>
+    </MS>
+  </Obj>
+</Objs>

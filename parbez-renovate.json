@@ -15,16 +15,14 @@
         "matchCurrentVersion": "!/^0/",
         "automerge": true
       },
-      {	"matchPackagePatterns": ["ansi-regex"],
-        "allowedVersions": "^5"
-      },
+      { "matchPackagePatterns": ["ansi-regex"], "allowedVersions": "^5" },
       {
         "matchPackagePatterns": ["@sapphire"],
         "groupName": "Sapphire Dependencies"
       },
       {
-        "matchPackagePatterns": ["@discord"],
-        "groupName": "Discord Dependencies"
+        "matchPackagePatterns": ["@discordjs", "discord.js"],
+        "groupName": "Discord.js Dependencies"
       },
       {
         "matchPackagePatterns": ["@imranbarbhuiya"],

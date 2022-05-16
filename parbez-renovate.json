@@ -29,6 +29,10 @@
         "groupName": "Parbez Dependencies"
       },
       {
+        "matchPackagePatterns": ["tagscript"],
+        "groupName": "TagScript Dependencies"
+      },
+      {
         "matchDepTypes": ["engines"],
         "enabled": false
       }

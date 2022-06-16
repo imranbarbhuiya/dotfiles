@@ -4,22 +4,22 @@
 [gpg]
 	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 [pager]
-  branch = false
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
+	branch = false
+	diff = delta
+	log = delta
+	reflog = delta
+	show = delta
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [commit]
 	gpgsign = true
 [tag]
-  forceSignAnnotated = true
+	forceSignAnnotated = true
 [init]
-  defaultBranch = main
+	defaultBranch = main
 [core]
 	editor = code --wait
 	autocrlf = false
@@ -31,12 +31,12 @@
 [rebase]
 	autoStash = true
 [merge]
-  tool = vscode
+	tool = vscode
 [mergetool "vscode"]
-  cmd = code --wait $MERGED
+	cmd = code --wait $MERGED
 [diff]
-  tool = vscode
+	tool = vscode
 [difftool "vscode"]
-  cmd = code --wait --diff $LOCAL $REMOTE
+	cmd = code --wait --diff $LOCAL $REMOTE
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+	diffFilter = delta --color-only --features=interactive

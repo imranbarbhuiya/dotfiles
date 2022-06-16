@@ -14,7 +14,14 @@ Function ylx {
 }
 
 Function yarnclean {
-	Remove-Item ((yarn cache dir) + '\*') -Force -Recurse -ErrorAction ignore;
+	$YarnVersion = $(yarn --version)
+
+	if ($YarnVersion.StartsWith('1')) {
+		Remove-Item ((yarn cache dir) + '\*') -Force -Recurse -ErrorAction ignore;
+	}
+	else {
+		yarn cache clean --mirror @Args
+	}
 	regenlockfile;
 }
 

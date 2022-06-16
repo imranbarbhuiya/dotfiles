@@ -61,8 +61,7 @@ Function Build-Trigger {
                 'bds' { $BaseMessage += ' #RUN_BDS' }
                 'docu' { $BaseMessage += ' #DOCU' }
                 'it' { $BaseMessage += ' #RUN_IT' }
-                'order' { $BaseMessage += ' #RUN_GMS_ORMAS' }
-                'ormas' { $BaseMessage += ' #RUN_ORMAS' }
+                'ormas' { $BaseMessage += ' #RUN_GMS_ORMAS' }
                 'plan' { $BaseMessage += ' #RUN_PLAN' }
                 'spoor' { $BaseMessage += ' #RUN_SPOOR' }
                 'testcafe' { $BaseMessage += ' #RUN_TESTCAFE' }
@@ -97,8 +96,8 @@ Function Set-Wlis-Location {
             'tertiary' {
                 Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisTertiary'
             }
-            'quaterniary' {
-                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisQuaterniary'
+            'quaternary' {
+                Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlisQuaternary'
             }
             Default {
                 Set-Location -Path 'C:\Users\j.claassens\Documents\workspace\wlis'

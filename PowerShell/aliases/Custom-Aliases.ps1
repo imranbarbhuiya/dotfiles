@@ -1,0 +1,1 @@
+Set-Alias -Name vsc -Value code

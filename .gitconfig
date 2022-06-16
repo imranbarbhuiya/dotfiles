@@ -1,0 +1,42 @@
+[user]
+	name = parbez
+	email = imranbarbhuiya.fsd@gmail.com
+[gpg]
+	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+[pager]
+  branch = false
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[commit]
+	gpgsign = true
+[tag]
+  forceSignAnnotated = true
+[init]
+  defaultBranch = main
+[core]
+	editor = code --wait
+	autocrlf = false
+	ignorecase = false
+[alias]
+	wtc = !git commit -m "$(curl -s whatthecommit.com/index.txt)"
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+[diff]
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[interactive]
+    diffFilter = delta --color-only --features=interactive

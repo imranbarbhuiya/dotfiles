@@ -36,8 +36,10 @@
       "closeOnExit": "graceful",
       "cursorColor": "#FFFFFF",
       "cursorShape": "bar",
-      "fontFace": "FiraCode NF",
-      "fontSize": 11,
+      "font": {
+        "face": "FiraCode NF",
+        "size": 11
+      },
       "historySize": 9001,
       "padding": "0, 0, 0, 0",
       "snapOnInput": true,
@@ -58,13 +60,6 @@
         "name": "Command Prompt"
       },
       {
-        "colorScheme": "Dracula vsc",
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": false,
-        "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure"
-      },
-      {
         "backgroundImage": null,
         "backgroundImageAlignment": "center",
         "backgroundImageOpacity": 0.75,
@@ -74,7 +69,6 @@
         "hidden": false,
         "name": "Git Bash",
         "source": "Git",
-        "startingDirectory": null,
         "suppressApplicationTitle": true,
         "tabTitle": "Git Bash",
         "useAcrylic": false
@@ -82,17 +76,15 @@
       {
         "backgroundImage": null,
         "colorScheme": "ENCOM",
-        "commandline": "C:\\Program Files\\nodejs\\node.exe",
+        "commandline": "C:\\Program Files\\Volta\\node.exe",
         "guid": "{b199c3ec-d134-5af3-9425-152ca276b052}",
-        "icon": "C:\\Users\\imran\\Downloads\\download-removebg-preview.png",
         "name": "Node",
-        "startingDirectory": null,
         "useAcrylic": false
       },
       {
-        "commandline": "C:\\Windows\\System32\\cmd.exe",
+        "commandline": "cmd.exe /K %USERPROFILE%\\anaconda3\\Scripts\\activate.bat",
         "guid": "{8cfc2a3d-a71d-5e12-a62a-05c2ad7340b7}",
-        "icon": "C:\\Users\\imran\\Downloads\\download__1_-removebg-preview.png",
+        "icon": "%USERPROFILE%\\anaconda3\\Menu\\anaconda-navigator.ico",
         "name": "Anaconda",
         "useAcrylic": false
       },
@@ -104,6 +96,13 @@
         "source": "Windows.Terminal.PowershellCore",
         "suppressApplicationTitle": true,
         "tabTitle": "PowerShell"
+      },
+      {
+        "colorScheme": "Dracula",
+        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": false,
+        "name": "Ubuntu",
+        "source": "Windows.Terminal.Wsl"
       }
     ]
   },

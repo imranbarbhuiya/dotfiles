@@ -24,10 +24,20 @@
 	autocrlf = false
 	ignorecase = false
 [alias]
+  # List all available aliases
+  alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+  # Delete all local branches but main and the current one, only if they are fully merged with main.
+  br-delete-useless = !git branch | grep -v "main" | grep -v ^* | xargs -r git branch -d
+  # Checkout
+  co = checkout
+  # Cherry Pick
+  cp = cherry-pick
   # Commit with whatthecommit
   ciyolo = "!f() { response=$(curl -s http://whatthecommit.com/index.json); message=$(echo ${response} | jq -r '.commit_message'); link=$(echo ${response} | jq -r '.permalink'); git commit $@ -nam \"chore: $(echo ${message} | tr '[:upper:]' '[:lower:]')\" -m \"permalink: ${link}\"; }; f"
   # Commit with whatthecommit then push
   yolo = !git ciyolo && git push
+  # Hard resets the local branch to the remote version. Warning: any changes comitted will be lost. This is a destructive command!
+  hardreset = "!f(){ read -n 1 -r -p 'Are you sure that you want to run git hardreset? [Y/n] '; echo; [[ $REPLY =~ ^[Yy]$ ]] && echo; git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); }; f"
 [pull]
 	rebase = true
 [rebase]

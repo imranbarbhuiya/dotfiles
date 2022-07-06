@@ -6,7 +6,6 @@
 [pager]
 	branch = false
 	diff = delta
-	log = delta
 	reflog = delta
 	show = delta
 [filter "lfs"]
@@ -25,7 +24,10 @@
 	autocrlf = false
 	ignorecase = false
 [alias]
-	wtc = !git commit -m "$(curl -s whatthecommit.com/index.txt)"
+  # Commit with whatthecommit
+  ciyolo = "!f() { response=$(curl -s http://whatthecommit.com/index.json); message=$(echo ${response} | jq -r '.commit_message'); link=$(echo ${response} | jq -r '.permalink'); git commit $@ -nam \"chore: $(echo ${message} | tr '[:upper:]' '[:lower:]')\" -m \"permalink: ${link}\"; }; f"
+  # Commit with whatthecommit then push
+  yolo = !git ciyolo && git push
 [pull]
 	rebase = true
 [rebase]

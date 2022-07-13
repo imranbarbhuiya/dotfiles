@@ -45,6 +45,11 @@
     "lockFileMaintenance": {
       "enabled": true,
       "extends": ["schedule:monthly"]
+    },
+    "vulnerabilityAlerts": {
+      "enabled": true,
+      "prCreation": "immediate",
+      "labels": ["Type: Security"]
     }
   }
 }

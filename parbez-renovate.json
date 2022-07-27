@@ -42,16 +42,9 @@
         "enabled": false
       }
     ],
-    "lockFileMaintenance": {
-      "enabled": true,
-      "automerge": true,
-      "extends": ["schedule:monthly"],
-      "labels": ["Type: Maintenance"]
-    },
     "vulnerabilityAlerts": {
       "enabled": true,
-      "prCreation": "immediate",
-      "labels": ["Type: Security"]
+      "prCreation": "immediate"
     }
   }
 }

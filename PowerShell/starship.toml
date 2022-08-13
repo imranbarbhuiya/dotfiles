@@ -5,9 +5,17 @@ format = ""
 
 [directory]
 truncate_to_repo = false
+truncation_length = -1
+style = "fg:bright-green"
+
+[username]
+show_always = true
+style_root = "bold fg:bright-blue"
+style_user = "bold fg:bright-blue"
 
 [git_branch]
 format = "[$symbol$branch]($style) "
+style = "fg:bright-yellow"
 
 [line_break]
 disabled = false

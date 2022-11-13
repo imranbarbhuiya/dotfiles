@@ -38,6 +38,10 @@
         "groupName": "Mantine Dependencies"
       },
       {
+        "matchPackagePatterns": ["unocss"],
+        "groupName": "Unocss Dependencies"
+      },
+      {
         "matchDepTypes": ["engines"],
         "enabled": false
       },

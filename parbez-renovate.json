@@ -42,7 +42,7 @@
         "groupName": "Unocss Dependencies"
       },
       {
-        "matchPackagePatterns": ["@tiptap", "tiptap-],
+        "matchPackagePatterns": ["@tiptap", "tiptap-"],
         "groupName": "Tiptap Dependencies"
       },
       {

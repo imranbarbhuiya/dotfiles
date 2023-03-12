@@ -12,38 +12,64 @@
     "rangeStrategy": "bump",
     "packageRules": [
       {
-        "matchUpdateTypes": ["minor", "patch"],
-        "matchCurrentVersion": "!/^0/",
-        "automerge": true
+        "matchUpdateTypes": ["patch"],
+        "matchCurrentVersion": "/^0\\./",
+        "automerge": true,
+        "platformAutomerge": true
       },
-      { "matchPackagePatterns": ["ansi-regex"], "allowedVersions": "^5" },
+      {
+        "matchUpdateTypes": ["minor", "patch"],
+        "matchCurrentVersion": ">=1.0.0",
+        "automerge": true,
+        "platformAutomerge": true
+      },
+      {
+        "matchPackagePatterns": ["ansi-regex"],
+        "allowedVersions": "^5",
+        "automerge": true,
+        "platformAutomerge": true
+      },
       {
         "matchPackagePatterns": ["@sapphire"],
-        "groupName": "Sapphire Dependencies"
+        "groupName": "Sapphire Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["@discordjs", "discord.js"],
-        "groupName": "Discord.js Dependencies"
+        "groupName": "Discord.js Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["@imranbarbhuiya"],
-        "groupName": "Parbez Dependencies"
+        "groupName": "Parbez Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["tagscript"],
-        "groupName": "TagScript Dependencies"
+        "groupName": "TagScript Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["@mantine"],
-        "groupName": "Mantine Dependencies"
+        "groupName": "Mantine Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["unocss"],
-        "groupName": "Unocss Dependencies"
+        "groupName": "Unocss Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchPackagePatterns": ["@tiptap", "tiptap-"],
-        "groupName": "Tiptap Dependencies"
+        "groupName": "Tiptap Dependencies",
+        "automerge": true,
+        "platformAutomerge": true
       },
       {
         "matchDepTypes": ["engines"],

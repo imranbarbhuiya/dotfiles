@@ -30,7 +30,6 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 # Load all custom completions
 & "$completionsDirectory\Starship-Completions.ps1"
 & "$completionsDirectory\Gh-Completions.ps1"
-& "$completionsDirectory\Custom-Completions.ps1"
 & "$completionsDirectory\Volta-Completions.ps1"
 
 

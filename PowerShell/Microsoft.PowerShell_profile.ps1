@@ -25,6 +25,7 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 . $functionsDirectory\Terminal-Functions.ps1
 . $functionsDirectory\Video-Functions.ps1
 . $functionsDirectory\ScreenResolution.ps1
+. $functionsDirectory\GitHub-Copilot.ps1
 
 # Load all custom completions
 & "$completionsDirectory\Starship-Completions.ps1"
@@ -39,39 +40,3 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 $Env:STARSHIP_CONFIG = "$PSScriptRoot\starship.toml"
 Invoke-Expression (&starship init powershell)
 
-# github copilot cli
-Function copilot_check-response {
-  if ( $Args[0] -eq $true ) {
-    $FIXED_CMD = Get-Content $TMPFILE
-    Remove-Item $TMPFILE -ErrorAction SilentlyContinue
-    Invoke-Expression $FIXED_CMD
-  }
-  else {
-    Write-Host "User cancelled the command."
-    Remove-Item $TMPFILE -ErrorAction SilentlyContinue
-  }
-}
-
-Function copilot_what-the-shell {
-  $TMPFILE = New-TemporaryFile
-  trap {Remove-Item $TMPFILE -ErrorAction SilentlyContinue}
-  github-copilot-cli what-the-shell "$args" --shellout $TMPFILE
-  copilot_check-response $?
-}
-Set-Alias ?? copilot_what-the-shell
-
-Function copilot_git-assist {
-  $TMPFILE = New-TemporaryFile
-  trap {Remove-Item $TMPFILE -ErrorAction SilentlyContinue}
-  github-copilot-cli git-assist "$args" --shellout $TMPFILE
-  copilot_check-response $?
-}
-Set-Alias git? copilot_git-assist
-
-Function copilot_gh-assist {
-  $TMPFILE = New-TemporaryFile
-  trap {Remove-Item $TMPFILE -ErrorAction SilentlyContinue}
-  github-copilot-cli gh-assist "$args" --shellout $TMPFILE
-  copilot_check-response $?
-}
-Set-Alias gh? copilot_gh-assist

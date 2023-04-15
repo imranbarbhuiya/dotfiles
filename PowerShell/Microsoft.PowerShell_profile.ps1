@@ -21,15 +21,14 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 # Load all custom functions
 . $functionsDirectory\Git-Functions.ps1
 . $functionsDirectory\GitHub-Cli-Functions.ps1
+. $functionsDirectory\Github-Copilot.ps1
 . $functionsDirectory\NodeJS-Functions.ps1
 . $functionsDirectory\Terminal-Functions.ps1
-. $functionsDirectory\Video-Functions.ps1
-. $functionsDirectory\ScreenResolution.ps1
-. $functionsDirectory\GitHub-Copilot.ps1
 
 # Load all custom completions
-& "$completionsDirectory\Starship-Completions.ps1"
 & "$completionsDirectory\Gh-Completions.ps1"
+& "$completionsDirectory\Git-Cliff-Completions.ps1"
+& "$completionsDirectory\Starship-Completions.ps1"
 & "$completionsDirectory\Volta-Completions.ps1"
 
 

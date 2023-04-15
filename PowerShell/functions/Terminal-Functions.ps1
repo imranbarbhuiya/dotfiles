@@ -59,18 +59,6 @@ Function Set-SkyraProject-Location {
 	}
 }
 
-Function Set-Favware-Location {
-	[CmdletBinding()]
-	Param (
-		[Parameter(Mandatory = $False, ValueFromRemainingArguments = $False)]
-		$Repo
-	)
-
-	Process {
-		Set-Location -Path ( -join ('F:\dev\favware\', $Repo))
-	}
-}
-
 Function x {
 	exit;
 }

@@ -33,7 +33,7 @@
   # Cherry Pick
   cp = cherry-pick
   # Commit with whatthecommit
-  ciyolo = "!f() { response=$(curl -s http://whatthecommit.com/index.json); message=$(echo ${response} | jq -r '.commit_message'); link=$(echo ${response} | jq -r '.permalink'); git commit $@ -nam \"chore: $(echo ${message} | tr '[:upper:]' '[:lower:]')\" -m \"permalink: ${link}\"; }; f"
+  ciyolo = "!f() { response=$(curl -s https://whatthecommit.com/index.json); message=$(echo ${response} | jq -r '.commit_message'); link=$(echo ${response} | jq -r '.permalink'); git commit $@ -nam \"chore: $(echo ${message} | tr '[:upper:]' '[:lower:]')\" -m \"permalink: ${link}\"; }; f"
   # Commit with whatthecommit then push
   yolo = !git ciyolo && git push
   # Hard resets the local branch to the remote version. Warning: any changes comitted will be lost. This is a destructive command!

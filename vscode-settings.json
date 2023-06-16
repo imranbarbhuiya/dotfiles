@@ -50,6 +50,9 @@
   "editor.guides.bracketPairs": "active",
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
+  "editor.minimap.autohide": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.scale": 2,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.suggestSelection": "first",
   "emmet.excludeLanguages": [],
@@ -101,6 +104,7 @@
   "gitlens.defaultDateFormat": null,
   "gitlens.views.branches.branches.layout": "list",
   "html.autoClosingTags": true,
+  "inlineChat.mode": "livePreview",
   "interactiveEditor.editMode": "livePreview",
   "javascript.autoClosingTags": true,
   "javascript.suggest.autoImports": true,
@@ -117,21 +121,16 @@
   },
   "prettier.singleQuote": true,
   "redhat.telemetry.enabled": true,
-  "remote.SSH.remotePlatform": {
-    "roti": "linux",
-    "roti-new": "linux",
-    "sofi-i9": "linux",
-    "sofi-i9-new-ip": "linux",
-    "sofi-ryzen": "linux",
-    "sofi-site": "linux"
-  },
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
+  "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
   "search.exclude": {
     "**/*.code-search": true,
     "**/.yarn": true,
     "**/bower_components": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/yarn.lock": true
   },
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.autoReplies": {

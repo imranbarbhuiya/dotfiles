@@ -35,7 +35,9 @@
     "Webdeveloper"
   ],
   "diffEditor.diffAlgorithm": "advanced",
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.experimental.collapseUnchangedRegions": true,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.experimental.useVersion2": true,
   "discord.detailsEditing": "Editing {file_name} | {file_size}",
   "discord.largeImage": "Editing a {lang} file",
   "editor.accessibilitySupport": "off",
@@ -94,6 +96,13 @@
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
   "git.openRepositoryInParentFolders": "never",
+  "github.copilot.advanced": {
+    "slashCommands": {
+      "createNotebook": true,
+      "createWorkspace": true,
+      "search": true
+    }
+  },
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
@@ -105,7 +114,6 @@
   "gitlens.views.branches.branches.layout": "list",
   "html.autoClosingTags": true,
   "inlineChat.mode": "livePreview",
-  "interactiveEditor.editMode": "livePreview",
   "javascript.autoClosingTags": true,
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -178,5 +186,6 @@
   "workbench.commandPalette.experimental.useSemanticSimilarity": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "diffEditor.ignoreTrimWhitespace": false
 }

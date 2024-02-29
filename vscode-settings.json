@@ -35,9 +35,7 @@
     "Webdeveloper"
   ],
   "diffEditor.diffAlgorithm": "advanced",
-  "diffEditor.experimental.collapseUnchangedRegions": true,
   "diffEditor.experimental.showMoves": true,
-  "diffEditor.experimental.useVersion2": true,
   "discord.detailsEditing": "Editing {file_name} | {file_size}",
   "discord.largeImage": "Editing a {lang} file",
   "editor.accessibilitySupport": "off",
@@ -50,6 +48,7 @@
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": "active",
+  "editor.inlayHints.enabled": "on",
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
   "editor.minimap.autohide": true,
@@ -65,11 +64,11 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.mjs, ${capture}.global.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.mjs, ${capture}.global.js, ${capture}.test.js",
     "*.jsx": "${capture}.js",
     "*.mjs": "${capture}.mjs.map, ${capture}.min.mjs, ${capture}.d.mts",
-    "*.ts": "${capture}.js",
-    "*.tsx": "${capture}.ts, ${capture}.module.css, ${capture}.css",
+    "*.ts": "${capture}.test.ts, ${capture}.js",
+    "*.tsx": "${capture}.ts, ${capture}.test.tsx, ${capture}.test.ts, ${capture}.module.css, ${capture}.css",
     ".env.local": ".env.*",
     ".eslintrc.json": ".eslint*, .prettier*",
     ".gitignore": ".gitattributes, .gitmodules",
@@ -105,34 +104,24 @@
   },
   "github.copilot.enable": {
     "*": true,
+    "plaintext": true,
     "markdown": true,
-    "plaintext": false,
     "scminput": true
   },
   "githubPullRequests.pullBranch": "never",
   "gitlens.defaultDateFormat": null,
   "gitlens.views.branches.branches.layout": "list",
   "html.autoClosingTags": true,
-  "inlineChat.mode": "livePreview",
+  "inlineChat.mode": "live",
   "javascript.autoClosingTags": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "markdownlint.config": {
-    "MD010": {
-      "code_blocks": false
-    },
-    "MD033": false,
-    "MD041": false
-  },
-  "material-icon-theme.files.associations": {
-    "*.sce": "../../icons/scilab"
-  },
   "prettier.singleQuote": true,
   "redhat.telemetry.enabled": true,
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
-  "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
   "search.exclude": {
     "**/*.code-search": true,
     "**/.yarn": true,
@@ -176,6 +165,7 @@
     }
   },
   "typescript.autoClosingTags": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.commandCenter": true,
@@ -183,9 +173,17 @@
     "statusBar.background": "#000000"
   },
   "workbench.colorTheme": "Pink Candy Dark",
-  "workbench.commandPalette.experimental.useSemanticSimilarity": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
-  "diffEditor.ignoreTrimWhitespace": false
+  "window.titleBarStyle": "custom",
+  "workbench.activityBar.location": "top",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "git.ignoreRebaseWarning": true,
+  "mdx.validate.validateFileLinks": "ignore",
+  "mdx.validate.validateFragmentLinks": "ignore",
+  "mdx.validate.validateReferences": "ignore",
+  "biome.requireConfiguration": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.hideUnchangedRegions.enabled": true
 }

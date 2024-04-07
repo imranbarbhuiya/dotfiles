@@ -4,6 +4,9 @@
   "labels": ["dependencies"],
   "schedule": ["before 12pm on Sunday"],
   "configMigration": true,
+  "major": {
+		"ignoreDeps": ["eslint"]
+  }
   "npm": {
     "rangeStrategy": "bump",
     "packageRules": [

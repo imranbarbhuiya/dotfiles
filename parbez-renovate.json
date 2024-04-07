@@ -6,7 +6,7 @@
   "configMigration": true,
   "major": {
 		"ignoreDeps": ["eslint"]
-  }
+  },
   "npm": {
     "rangeStrategy": "bump",
     "packageRules": [

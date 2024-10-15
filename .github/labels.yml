@@ -16,20 +16,12 @@
   color: '0075ca'
 - name: duplicate
   color: 'cfd3d7'
-- name: error handling
-  color: 'ffff00'
 - name: feature
   color: 'ffff00'
 - name: hacktoberfest-accepted
   color: 'EE4700'
-- name: has PR
-  color: '4b1f8e'
 - name: help wanted
   color: '008672'
-- name: in progress
-  color: 'ffccd7'
-- name: in review
-  color: 'aed5fc'
 - name: invalid
   color: 'e4e669'
 - name: need repro
@@ -56,5 +48,9 @@
   color: 'f06dff'
 - name: typings
   color: '80c042'
+- name: bun
+  color: 'fbf0df'
+- name: deno
+  color: 'ffffff'
 - name: wontfix
   color: 'ffffff'

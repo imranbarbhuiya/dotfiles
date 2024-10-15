@@ -1,4 +1,12 @@
 {
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": false
+  },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
     "editor.suggest.insertMode": "replace",
@@ -24,18 +32,15 @@
     "mehrin",
     "Middlewares",
     "nextjs",
-    "nocheck",
-    "nodownload",
-    "onhover",
     "parbez",
     "paren",
     "parens",
-    "Pentester",
-    "preconnect",
-    "Webdeveloper"
+    "preconnect"
   ],
   "diffEditor.diffAlgorithm": "advanced",
   "diffEditor.experimental.showMoves": true,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
   "discord.detailsEditing": "Editing {file_name} | {file_size}",
   "discord.largeImage": "Editing a {lang} file",
   "editor.accessibilitySupport": "off",
@@ -50,11 +55,11 @@
   "editor.guides.bracketPairs": "active",
   "editor.inlayHints.enabled": "on",
   "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.suppressSuggestions": true,
   "editor.linkedEditing": true,
   "editor.minimap.autohide": true,
   "editor.minimap.renderCharacters": false,
   "editor.minimap.scale": 2,
-  "editor.multiCursorModifier": "ctrlCmd",
   "editor.suggestSelection": "first",
   "emmet.excludeLanguages": [],
   "emmet.includeLanguages": {
@@ -72,6 +77,7 @@
     ".env.local": ".env.*",
     ".eslintrc.json": ".eslint*, .prettier*",
     ".gitignore": ".gitattributes, .gitmodules",
+    "eslint.config.js": ".eslint*, .prettier*",
     "jest.config.cjs": "jest-*.cjs, jest.*.cjs",
     "jest.config.js": "jest-*.js, jest.*.js",
     "jest.config.mjs": "jest-*.mjs, jest.*.mjs",
@@ -94,6 +100,7 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
+  "git.ignoreRebaseWarning": true,
   "git.openRepositoryInParentFolders": "never",
   "github.copilot.advanced": {
     "slashCommands": {
@@ -102,23 +109,29 @@
       "search": true
     }
   },
+  "github.copilot.chat.experimental.temporalContext.enabled": true,
+  "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
-    "plaintext": true,
     "markdown": true,
+    "plaintext": true,
     "scminput": true
   },
   "githubPullRequests.pullBranch": "never",
   "gitlens.defaultDateFormat": null,
+  "gitlens.launchpad.indicator.enabled": false,
   "gitlens.views.branches.branches.layout": "list",
+  "go.toolsManagement.autoUpdate": true,
   "html.autoClosingTags": true,
   "inlineChat.mode": "live",
   "javascript.autoClosingTags": true,
   "javascript.inlayHints.parameterNames.enabled": "all",
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "mdx.validate.validateFileLinks": "ignore",
+  "mdx.validate.validateFragmentLinks": "ignore",
+  "mdx.validate.validateReferences": "ignore",
   "prettier.singleQuote": true,
-  "redhat.telemetry.enabled": true,
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
@@ -133,6 +146,11 @@
   "terminal.integrated.autoReplies": {
     "Terminate batch job (Y/N)": "Y\r"
   },
+  "terminal.integrated.env.osx": {
+    "CW_NEW_SESSION": "1",
+    "Q_NEW_SESSION": "1"
+  },
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font'",
   "terminal.integrated.shellIntegration.enabled": true,
   "todo-tree.general.tags": [
     "BUG",
@@ -166,24 +184,27 @@
   },
   "typescript.autoClosingTags": true,
   "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
   "typescript.suggest.autoImports": true,
+  "typescript.tsserver.watchOptions": "vscode",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.commandCenter": true,
+  "window.newWindowDimensions": "maximized",
+  "window.titleBarStyle": "custom",
+  "workbench.activityBar.location": "bottom",
   "workbench.colorCustomizations": {
     "statusBar.background": "#000000"
   },
   "workbench.colorTheme": "Pink Candy Dark",
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/_layout.tsx": "${dirname} - Layout",
+    "**/app/**/index.tsx": "${dirname} - Page",
+    "**/app/**/layout.tsx": "${dirname} - Layout",
+    "**/app/**/page.tsx": "${dirname} - Page",
+    "**/app/**/route.tsx": "${dirname} - Route",
+    "**/components/**/index.tsx": "${dirname} - Component"
+  },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "none",
-  "window.titleBarStyle": "custom",
-  "workbench.activityBar.location": "top",
-  "typescript.preferences.preferTypeOnlyAutoImports": true,
-  "git.ignoreRebaseWarning": true,
-  "mdx.validate.validateFileLinks": "ignore",
-  "mdx.validate.validateFragmentLinks": "ignore",
-  "mdx.validate.validateReferences": "ignore",
-  "biome.requireConfiguration": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "diffEditor.hideUnchangedRegions.enabled": true
+  "workbench.startupEditor": "none"
 }

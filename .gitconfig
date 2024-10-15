@@ -39,6 +39,8 @@
   yolo = !git ciyolo && git push
   # Hard resets the local branch to the remote version. Warning: any changes comitted will be lost. This is a destructive command!
   hardreset = "!f(){ read -n 1 -r -p 'Are you sure that you want to run git hardreset? [Y/n] '; echo; [[ $REPLY =~ ^[Yy]$ ]] && echo; git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); }; f"
+  # Get last commit info
+  last = log -1 HEAD
 [push]
 	autoSetupRemote = true
 [pull]

@@ -1,87 +1,34 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "group:allNonMajor"],
-  "labels": ["dependencies"],
-  "schedule": ["before 12pm on Sunday"],
-  "configMigration": true,
-  "major": {
-		"ignoreDeps": ["eslint"]
-  },
-  "npm": {
-    "rangeStrategy": "bump",
-    "packageRules": [
-      {
-        "matchUpdateTypes": ["patch"],
-        "matchCurrentVersion": "/^0\\./",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchUpdateTypes": ["minor", "patch"],
-        "matchCurrentVersion": ">=1.0.0",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["ansi-regex"],
-        "allowedVersions": "^5",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["@sapphire"],
-        "groupName": "Sapphire Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["@discordjs", "discord.js"],
-        "groupName": "Discord.js Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["@imranbarbhuiya"],
-        "groupName": "Parbez Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["tagscript"],
-        "groupName": "TagScript Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["@mantine"],
-        "groupName": "Mantine Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["unocss"],
-        "groupName": "Unocss Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchPackagePatterns": ["@tiptap", "tiptap-"],
-        "groupName": "Tiptap Dependencies",
-        "automerge": true,
-        "platformAutomerge": true
-      },
-      {
-        "matchDepTypes": ["engines"],
-        "enabled": false
-      },
-      {
-        "depTypeList": ["peerDependencies"],
-        "enabled": false
-      }
-    ],
-    "vulnerabilityAlerts": {
-      "enabled": true,
-      "prCreation": "immediate"
-    }
-  }
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended", "group:allNonMajor"],
+	"labels": ["dependencies"],
+	"schedule": ["before 12pm on Sunday"],
+	"cloneSubmodules": true,
+	"configMigration": true,
+	"npm": {
+		"postUpdateOptions": ["yarnDedupeHighest"],
+		"rangeStrategy": "bump",
+		"packageRules": [
+			{
+				"matchUpdateTypes": ["patch"],
+				"matchCurrentVersion": "/^0\\./",
+				"automerge": true,
+				"platformAutomerge": true
+			},
+			{
+				"matchUpdateTypes": ["minor", "patch"],
+				"matchCurrentVersion": ">=1.0.0",
+				"automerge": true,
+				"platformAutomerge": true
+			},
+			{
+				"matchDepTypes": ["engines"],
+				"enabled": false
+			},
+		      	{
+		        	"depTypeList": ["peerDependencies"],
+		        	"enabled": false
+		      	}
+		]
+	}
 }

@@ -10,7 +10,9 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
     "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": ["document"]
+    "gitlens.codeLens.scopes": [
+      "document"
+    ]
   },
   "[python]": {
     "editor.formatOnType": true
@@ -21,7 +23,14 @@
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
-  "cSpell.showAutocompleteSuggestions": true,
+  "chat.agent.maxRequests": 100,
+  "chat.tools.autoApprove": true,
+  "coderabbit.autoReviewMode": "disabled",
+  "cSpell.enabledNotifications": {
+    "Average Word Length too Long": false,
+    "Lines too Long": false,
+    "Maximum Word Length Exceeded": false
+  },
   "cSpell.userWords": [
     "Barbhuiya",
     "Hussain",
@@ -40,15 +49,14 @@
   "diffEditor.diffAlgorithm": "advanced",
   "diffEditor.experimental.showMoves": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "discord.detailsEditing": "Editing {file_name} | {file_size}",
-  "discord.largeImage": "Editing a {lang} file",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.renderSideBySide": true,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.defaultColorDecorators": true,
+  "editor.defaultColorDecorators": "auto",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "'JetBrains Mono', 'FiraCode Nerd Font', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Monaspace Neon', 'JetBrains Mono', 'FiraCode Nerd Font'",
   "editor.fontLigatures": true,
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
@@ -57,7 +65,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.inlineSuggest.suppressSuggestions": true,
   "editor.linkedEditing": true,
-  "editor.minimap.autohide": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.minimap.renderCharacters": false,
   "editor.minimap.scale": 2,
   "editor.suggestSelection": "first",
@@ -66,18 +74,22 @@
     "markdown": "html",
     "vue-html": "html"
   },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.mjs, ${capture}.global.js, ${capture}.test.js",
-    "*.jsx": "${capture}.js",
-    "*.mjs": "${capture}.mjs.map, ${capture}.min.mjs, ${capture}.d.mts",
-    "*.ts": "${capture}.test.ts, ${capture}.js",
-    "*.tsx": "${capture}.ts, ${capture}.test.tsx, ${capture}.test.ts, ${capture}.module.css, ${capture}.css",
     ".env.local": ".env.*",
     ".eslintrc.json": ".eslint*, .prettier*",
     ".gitignore": ".gitattributes, .gitmodules",
-    "eslint.config.js": ".eslint*, .prettier*",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.mjs, ${capture}.global.js, ${capture}.test.js",
+    "*.jsx": "${capture}.js",
+    "*.mjs": "${capture}.mjs.map, ${capture}.min.mjs, ${capture}.d.mts",
+    "*.schema.ts": "${capture}.model.ts, ${capture}.dto.ts",
+    "*.ts": "${capture}.test.ts, ${capture}.js",
+    "*.tsx": "${capture}.ts, ${capture}.test.tsx, ${capture}.test.ts, ${capture}.module.css, ${capture}.css",
+    "eslint.config.js": ".eslint*, .prettier*, biome.json",
+    "eslint.config.mjs": ".eslint*, .prettier*, biome.json",
     "jest.config.cjs": "jest-*.cjs, jest.*.cjs",
     "jest.config.js": "jest-*.js, jest.*.js",
     "jest.config.mjs": "jest-*.mjs, jest.*.mjs",
@@ -109,21 +121,27 @@
       "search": true
     }
   },
-  "github.copilot.chat.experimental.temporalContext.enabled": true,
-  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use conventional commit message format."
+    }
+  ],
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
     "plaintext": true,
     "scminput": true
   },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
   "githubPullRequests.pullBranch": "never",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4o",
   "gitlens.defaultDateFormat": null,
   "gitlens.launchpad.indicator.enabled": false,
   "gitlens.views.branches.branches.layout": "list",
   "go.toolsManagement.autoUpdate": true,
   "html.autoClosingTags": true,
-  "inlineChat.mode": "live",
   "javascript.autoClosingTags": true,
   "javascript.inlayHints.parameterNames.enabled": "all",
   "javascript.suggest.autoImports": true,
@@ -132,12 +150,24 @@
   "mdx.validate.validateFragmentLinks": "ignore",
   "mdx.validate.validateReferences": "ignore",
   "prettier.singleQuote": true,
+  "redhat.telemetry.enabled": false,
+  "remote.defaultExtensionsIfInstalledLocally": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "remote.SSH.remotePlatform": {},
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
-  "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
+  "rust-analyzer.check.extraArgs": [
+    "--all",
+    "--",
+    "-D",
+    "warnings"
+  ],
   "search.exclude": {
-    "**/*.code-search": true,
+    "**/.next": true,
     "**/.yarn": true,
+    "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true,
     "**/yarn.lock": true
@@ -151,7 +181,10 @@
     "Q_NEW_SESSION": "1"
   },
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font'",
+  "terminal.integrated.fontLigatures.enabled": true,
   "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.suggest.cdPath": "relative",
+  "terminal.integrated.suggest.enabled": true,
   "todo-tree.general.tags": [
     "BUG",
     "HACK",
@@ -183,19 +216,17 @@
     }
   },
   "typescript.autoClosingTags": true,
+  "typescript.experimental.expandableHover": true,
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.preferences.preferTypeOnlyAutoImports": true,
   "typescript.suggest.autoImports": true,
   "typescript.tsserver.watchOptions": "vscode",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.commandCenter": true,
+  "typescript.updateImportsOnPaste.enabled": false,
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#000000"
-  },
-  "workbench.colorTheme": "Pink Candy Dark",
+  "workbench.colorTheme": "GitHub Dark Default",
   "workbench.editor.customLabels.patterns": {
     "**/app/**/_layout.tsx": "${dirname} - Layout",
     "**/app/**/index.tsx": "${dirname} - Page",
@@ -205,6 +236,8 @@
     "**/components/**/index.tsx": "${dirname} - Component"
   },
   "workbench.iconTheme": "material-icon-theme",
+  "workbench.secondarySideBar.showLabels": false,
   "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "zig.zls.enabled": "on"
 }

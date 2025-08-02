@@ -10,9 +10,7 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
     "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": [
-      "document"
-    ]
+    "gitlens.codeLens.scopes": ["document"]
   },
   "[python]": {
     "editor.formatOnType": true
@@ -24,6 +22,7 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "chat.agent.maxRequests": 100,
+  "chat.editor.wordWrap": "on",
   "chat.tools.autoApprove": true,
   "coderabbit.autoReviewMode": "disabled",
   "cSpell.enabledNotifications": {
@@ -38,23 +37,13 @@
     "imranbarbhuiya",
     "keyspace",
     "lngs",
-    "mehrin",
-    "Middlewares",
     "nextjs",
-    "parbez",
-    "paren",
-    "parens",
     "preconnect"
   ],
-  "diffEditor.diffAlgorithm": "advanced",
   "diffEditor.experimental.showMoves": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.ignoreTrimWhitespace": true,
-  "diffEditor.renderSideBySide": true,
   "editor.accessibilitySupport": "off",
-  "editor.bracketPairColorization.enabled": true,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.defaultColorDecorators": "auto",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "'Monaspace Neon', 'JetBrains Mono', 'FiraCode Nerd Font'",
   "editor.fontLigatures": true,
@@ -67,8 +56,7 @@
   "editor.linkedEditing": true,
   "editor.minimap.autohide": "mouseover",
   "editor.minimap.renderCharacters": false,
-  "editor.minimap.scale": 2,
-  "editor.suggestSelection": "first",
+  "editor.minimap.scale": 1,
   "emmet.excludeLanguages": [],
   "emmet.includeLanguages": {
     "markdown": "html",
@@ -114,13 +102,6 @@
   "git.enableCommitSigning": true,
   "git.ignoreRebaseWarning": true,
   "git.openRepositoryInParentFolders": "never",
-  "github.copilot.advanced": {
-    "slashCommands": {
-      "createNotebook": true,
-      "createWorkspace": true,
-      "search": true
-    }
-  },
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Use conventional commit message format."
@@ -141,14 +122,8 @@
   "gitlens.launchpad.indicator.enabled": false,
   "gitlens.views.branches.branches.layout": "list",
   "go.toolsManagement.autoUpdate": true,
-  "html.autoClosingTags": true,
-  "javascript.autoClosingTags": true,
   "javascript.inlayHints.parameterNames.enabled": "all",
-  "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "mdx.validate.validateFileLinks": "ignore",
-  "mdx.validate.validateFragmentLinks": "ignore",
-  "mdx.validate.validateReferences": "ignore",
   "prettier.singleQuote": true,
   "redhat.telemetry.enabled": false,
   "remote.defaultExtensionsIfInstalledLocally": [
@@ -158,12 +133,7 @@
   "remote.SSH.remotePlatform": {},
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
-  "rust-analyzer.check.extraArgs": [
-    "--all",
-    "--",
-    "-D",
-    "warnings"
-  ],
+  "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
   "search.exclude": {
     "**/.next": true,
     "**/.yarn": true,
@@ -182,7 +152,6 @@
   },
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font'",
   "terminal.integrated.fontLigatures.enabled": true,
-  "terminal.integrated.shellIntegration.enabled": true,
   "terminal.integrated.suggest.cdPath": "relative",
   "terminal.integrated.suggest.enabled": true,
   "todo-tree.general.tags": [
@@ -215,12 +184,9 @@
       "foreground": "#000000"
     }
   },
-  "typescript.autoClosingTags": true,
   "typescript.experimental.expandableHover": true,
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.preferences.preferTypeOnlyAutoImports": true,
-  "typescript.suggest.autoImports": true,
-  "typescript.tsserver.watchOptions": "vscode",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnPaste.enabled": false,
   "window.newWindowDimensions": "maximized",

@@ -4,12 +4,12 @@ command_timeout = 1000
 format = ""
 
 [directory]
-truncate_to_repo = false
+truncate_to_repo = true
 truncation_length = -1
 style = "fg:bright-green"
 
 [username]
-show_always = true
+show_always = false
 style_root = "bold fg:bright-blue"
 style_user = "bold fg:bright-blue"
 
@@ -21,7 +21,7 @@ style = "fg:bright-yellow"
 disabled = false
 
 [time]
-disabled = false
+disabled = true
 format = '🕙[ $time ]($style)'
 time_format = "%R"
 
@@ -38,7 +38,7 @@ renamed = "[🚗 ${count}](bright-red) "
 deleted = "[🗑 ${count}](red) "
 
 [git_commit]
-only_detached = false
+only_detached = true
 
 [java]
 disabled = true

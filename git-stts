@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # This code is based on https://github.com/chshersh/zbg
+# To use, save it as `git-stts` and make it executable:
+# chmod +x git-stts
+# Then move it to a directory in your PATH, e.g. /usr/local/bin
+# You can then run it in any git repository with: `git stts`
 
 set -e
 

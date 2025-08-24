@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This code is based on https://github.com/chshersh/zbg
+# This code is inspired by https://github.com/chshersh/zbg
 # To use, save it as `git-stts` and make it executable:
 # chmod +x git-stts
 # Then move it to a directory in your PATH, e.g. /usr/local/bin
@@ -54,7 +54,7 @@ if [ -n "$untracked" ]; then
 fi
 
 # pretty diff stats
-stats=$(git diff --stat --color)
+stats=$(git --no-pager diff --stat --color HEAD)
 if [ -n "$stats" ]; then
   echo -e "\033[1;36mDiff stats:\033[0m"
   echo "$stats"

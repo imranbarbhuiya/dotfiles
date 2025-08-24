@@ -5,58 +5,127 @@
 # chmod +x git-stts
 # Then move it to a directory in your PATH, e.g. /usr/local/bin
 # You can then run it in any git repository with: `git stts`
+# This version only works on Mac, for other OS, u can use the older version
 
-set -e
+set -euo pipefail
+LC_ALL=C
 
-# check if inside a git repo
-if ! git rev-parse --show-toplevel > /dev/null 2>&1; then
-  echo "Not a git repository"
-  exit 1
+ESC=$'\033'
+BOLD_GREEN="${ESC}[1;32m"
+BOLD_BLUE="${ESC}[1;34m"
+BOLD_MAGENTA="${ESC}[1;35m"
+BOLD_RED="${ESC}[1;31m"
+FG_GREEN="${ESC}[32m"
+FG_RED="${ESC}[31m"
+RESET="${ESC}[0m"
+
+# Require a Git repo
+if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
+  echo "Not a git repository"; exit 1
 fi
 
-# rebase in progress?
-if [ -d "$(git rev-parse --git-dir)/rebase-merge" ] || [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
-  echo -e "\033[1;34mRebase is currently in progress! Possible actions:\033[0m"
-  echo "    \033[33mgit rebase --continue\033[0m : after fixing conflicts"
-  echo "    \033[33mgit rebase --skip\033[0m     : to skip this patch"
-  echo "    \033[33mgit rebase --abort\033[0m    : to abort the rebase"
-  echo ""
-  conflict_files=$(git diff --name-only --diff-filter=U)
-  if [ -n "$conflict_files" ]; then
-    echo -e "\033[1;31mConflict files:\033[0m"
-    echo "$conflict_files" | sed 's/^/    /'
+# Build N copies of a char, colored once
+_repeat_colored() {
+  # $1=char ("+" or "-"), $2=count, $3=color
+  local ch="$1" n="${2:-0}" color="$3" raw=""
+  while [ "$n" -gt 0 ]; do raw="${raw}${ch}"; n=$((n-1)); done
+  [ -n "$raw" ] && printf "%s%s%s" "$color" "$raw" "$RESET"
+}
+
+_render_line() {
+  # $1=status  $2=path  $3=adds  $4=dels
+  local status="$1" path="$2" adds="${3:-0}" dels="${4:-0}"
+
+  # binaries/submodules show "-" which we treat as 0
+  if [ "$adds" = "-" ] || [ "$dels" = "-" ]; then
+    adds=0; dels=0
   fi
+
+  local total=$((adds + dels))
+  local bar=""
+  if [ "$adds" -gt 0 ] && [ "$dels" -gt 0 ]; then
+    bar="${FG_GREEN}+${RESET}${FG_RED}-${RESET}"
+  elif [ "$adds" -gt 0 ]; then
+    bar=$(_repeat_colored "+" "$adds" "$FG_GREEN")
+  elif [ "$dels" -gt 0 ]; then
+    bar=$(_repeat_colored "-" "$dels" "$FG_RED")
+  fi
+
+  printf "%-8s %s | %2d %s\n" "$status" "$path" "$total" "$bar"
+}
+
+# Lookup adds/deletes for a path from a numstat file
+_numstat_for() {
+  # $1=numstat_file  $2=path
+  awk -v p="$2" -F '\t' '
+    $3==p { a=$1; d=$2 }
+    END {
+      if(a=="-"||d=="-"){a=0; d=0}
+      if(a==""&&d==""){a=0; d=0}
+      printf "%s\t%s\n", a, d
+    }' "$1"
+}
+
+_print_section() {
+  # $1=color  $2=title  $3=scope ("--cached" or "")
+  local color="$1" title="$2" scope="$3"
+
+  if git diff $scope --quiet; then
+    return
+  fi
+
+  local numstat_file
+  numstat_file="$(mktemp -t gitstts_numstat.XXXXXX)"
+  git -c core.quotePath=off diff $scope --numstat >"$numstat_file" || true
+
+  printf "%b%s:%b\n" "$color" "$title" "$RESET"
+
+  git -c core.quotePath=off diff $scope --name-status -z | \
+  while IFS= read -r -d '' status; do
+    if [[ "$status" =~ ^R[0-9]+$ ]]; then
+      IFS= read -r -d '' old || break
+      IFS= read -r -d '' new || break
+      pair=$(_numstat_for "$numstat_file" "$new")
+      adds="${pair%%$'\t'*}"; dels="${pair#*$'\t'}"
+      _render_line "$status" "$old -> $new" "$adds" "$dels"
+    else
+      IFS= read -r -d '' path || break
+      pair=$(_numstat_for "$numstat_file" "$path")
+      adds="${pair%%$'\t'*}"; dels="${pair#*$'\t'}"
+      _render_line "$status" "$path" "$adds" "$dels"
+    fi
+  done
+
+  rm -f "$numstat_file"
   echo ""
+}
+
+# Rebase hints (optional)
+if [ -d "$(git rev-parse --git-dir)/rebase-merge" ] || [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
+  printf "%bRebase is currently in progress! Possible actions:%b\n" "$BOLD_BLUE" "$RESET"
+  printf "    \033[33mgit rebase --continue\033[0m : after fixing conflicts\n"
+  printf "    \033[33mgit rebase --skip\033[0m     : to skip this patch\n"
+  printf "    \033[33mgit rebase --abort\033[0m    : to abort the rebase\n\n"
+  conflict_files=$(git diff --name-only --diff-filter=U || true)
+  if [ -n "$conflict_files" ]; then
+    printf "%bConflict files:%b\n" "$BOLD_RED" "$RESET"
+    echo "$conflict_files" | sed 's/^/    /'
+    echo ""
+  fi
 fi
 
-# staged changes
-staged=$(git diff --cached --name-status)
-if [ -n "$staged" ]; then
-  echo -e "\033[1;32mStaged changes:\033[0m"
-  echo "$staged"
-  echo ""
-fi
+# Sections
+_print_section "$BOLD_GREEN" "Staged changes"   "--cached"
+_print_section "$BOLD_BLUE"  "Unstaged changes" ""
 
-# unstaged changes
-unstaged=$(git diff --name-status)
-if [ -n "$unstaged" ]; then
-  echo -e "\033[1;34mUnstaged changes:\033[0m"
-  echo "$unstaged"
-  echo ""
-fi
-
-# untracked files
-untracked=$(git ls-files --others --exclude-standard)
+# Untracked files
+untracked="$(git -c core.quotePath=off ls-files --others --exclude-standard || true)"
 if [ -n "$untracked" ]; then
-  echo -e "\033[1;35mUntracked files:\033[0m"
+  printf "%bUntracked files:%b\n" "$BOLD_MAGENTA" "$RESET"
   echo "$untracked" | sed 's/^/    /'
   echo ""
 fi
 
-# pretty diff stats
-stats=$(git --no-pager diff --stat --color HEAD)
-if [ -n "$stats" ]; then
-  echo -e "\033[1;36mDiff stats:\033[0m"
-  echo "$stats"
-  echo ""
-fi
+# Single combined summary (staged + unstaged)
+combined_ss="$(git diff HEAD --shortstat || true)"
+[ -n "$combined_ss" ] && echo " ${combined_ss}"

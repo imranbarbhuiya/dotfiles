@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This code is based on https://github.com/chshersh/zbg
+
 set -e
 
 # check if inside a git repo

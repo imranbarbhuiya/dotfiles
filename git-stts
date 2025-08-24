@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -e
+
+# check if inside a git repo
+if ! git rev-parse --show-toplevel > /dev/null 2>&1; then
+  echo "Not a git repository"
+  exit 1
+fi
+
+# rebase in progress?
+if [ -d "$(git rev-parse --git-dir)/rebase-merge" ] || [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
+  echo -e "\033[1;34mRebase is currently in progress! Possible actions:\033[0m"
+  echo "    \033[33mgit rebase --continue\033[0m : after fixing conflicts"
+  echo "    \033[33mgit rebase --skip\033[0m     : to skip this patch"
+  echo "    \033[33mgit rebase --abort\033[0m    : to abort the rebase"
+  echo ""
+  conflict_files=$(git diff --name-only --diff-filter=U)
+  if [ -n "$conflict_files" ]; then
+    echo -e "\033[1;31mConflict files:\033[0m"
+    echo "$conflict_files" | sed 's/^/    /'
+  fi
+  echo ""
+fi
+
+# staged changes
+staged=$(git diff --cached --name-status)
+if [ -n "$staged" ]; then
+  echo -e "\033[1;32mStaged changes:\033[0m"
+  echo "$staged"
+  echo ""
+fi
+
+# unstaged changes
+unstaged=$(git diff --name-status)
+if [ -n "$unstaged" ]; then
+  echo -e "\033[1;34mUnstaged changes:\033[0m"
+  echo "$unstaged"
+  echo ""
+fi
+
+# untracked files
+untracked=$(git ls-files --others --exclude-standard)
+if [ -n "$untracked" ]; then
+  echo -e "\033[1;35mUntracked files:\033[0m"
+  echo "$untracked" | sed 's/^/    /'
+  echo ""
+fi
+
+# pretty diff stats
+stats=$(git diff --stat --color)
+if [ -n "$stats" ]; then
+  echo -e "\033[1;36mDiff stats:\033[0m"
+  echo "$stats"
+  echo ""
+fi

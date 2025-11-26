@@ -31,9 +31,12 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "chat.agent.maxRequests": 100,
+  "chat.commandCenter.enabled": false,
   "chat.editor.fontFamily": "Lilex, 'JetBrains Mono'",
   "chat.editor.wordWrap": "on",
+  "chat.edits2.enabled": true,
   "chat.fontFamily": "Lilex, 'JetBrains Mono'",
+  "chat.tools.terminal.autoReplyToPrompts": true,
   "cSpell.enabledNotifications": {
     "Average Word Length too Long": false,
     "Lines too Long": false,
@@ -116,22 +119,6 @@
   "git.enableCommitSigning": true,
   "git.ignoreRebaseWarning": true,
   "git.openRepositoryInParentFolders": "never",
-  "github.copilot.chat.alternateGptPrompt.enabled": true,
-  "github.copilot.chat.commitMessageGeneration.instructions": [
-    {
-      "text": "Use conventional commit message format."
-    }
-  ],
-  "github.copilot.chat.gpt5AlternatePrompt": "v2",
-  "github.copilot.chat.grokCodeAlternatePrompt": "v2",
-  "github.copilot.enable": {
-    "*": true,
-    "markdown": true,
-    "plaintext": true,
-    "scminput": true
-  },
-  "github.copilot.nextEditSuggestions.enabled": false,
-  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
   "githubPullRequests.pullBranch": "never",
   "githubPullRequests.terminalLinksHandler": "github",
   "gitlens.ai.model": "vscode",
@@ -142,6 +129,7 @@
   "gitlens.launchpad.indicator.enabled": false,
   "gitlens.views.branches.branches.layout": "list",
   "go.toolsManagement.autoUpdate": true,
+  "inlineChat.enableV2": true,
   "javascript.inlayHints.parameterNames.enabled": "all",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "prettier.singleQuote": true,
@@ -150,7 +138,6 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode"
   ],
-  "remote.SSH.remotePlatform": {},
   "remoteHub.commitDirectlyWarning": "off",
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.check.extraArgs": ["--all", "--", "-D", "warnings"],
@@ -209,7 +196,6 @@
   "typescript.preferences.preferTypeOnlyAutoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnPaste.enabled": false,
-  "vim.overrideCopy": false,
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",

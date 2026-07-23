@@ -1,0 +1,23 @@
+{
+  "model": "opus",
+  "theme": "auto",
+  "enableArtifact": false,
+  "includeCoAuthoredBy": false,
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true
+  },
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.claude/hooks/tab-title-working.sh" } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.claude/hooks/tab-title-working.sh" } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.claude/hooks/tab-title-done.sh" } ] }
+    ],
+    "Notification": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.claude/hooks/tab-title-notify.sh" } ] }
+    ]
+  }
+}

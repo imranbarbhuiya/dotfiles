@@ -1,8 +1,8 @@
+[fetch]
+    prune = true
 [user]
 	name = parbez
 	email = imranbarbhuiya.fsd@gmail.com
-[pager]
-	branch = false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -11,14 +11,16 @@
 [commit]
 	gpgsign = true
 [tag]
+	sort = version:refname
 	forceSignAnnotated = true
 [init]
 	defaultBranch = main
 [core]
-	editor = code --wait
+	editor = cursor --wait
 	autocrlf = false
-	ignoreCase = false
+	ignorecase = false
 	symlinks = true
+	excludesfile = /Users/imranhussain/.gitignore
 [alias]
   # List all available aliases
   alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
@@ -28,19 +30,27 @@
   co = checkout
 
   undo = reset --soft HEAD^
+  yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
+    followTags = true
 [pull]
 	rebase = true
 [rebase]
-	autoStash = true
-[merge]
-	tool = vscode
-[mergetool "vscode"]
-	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+[rerere]
+    enabled = true
 [diff]
-	tool = vscode
-[difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
-[http]
-	postBuffer = 524288000
+    algorithm = histogram
+    colorMoved = default
+[merge]
+    conflictStyle = zdiff3
+[branch]
+    sort = -committerdate
+[column]
+    ui = auto
+[status]
+    short = true
+    branch = true

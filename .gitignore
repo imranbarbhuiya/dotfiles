@@ -1,0 +1,27 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Credentials and local agent state
+auth.json
+hosts.yml
+mcp.json
+settings.local.json
+history.jsonl
+session.json
+sessions/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.log
+*.sock
+
+# Generated Herdr and agent integrations
+.plugins.lock
+herdr-agent-state.sh
+
+# Tool caches and dependencies
+node_modules/
+.cache/
+dist/

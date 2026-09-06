@@ -1,19 +1,23 @@
 // Place your key bindings in this file to override the defaults
 [
   {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
     "key": "shift+cmd+m",
     "command": "workbench.action.reloadWindow"
   },
   {
     "key": "cmd+n",
     "command": "explorer.newFile"
-  },
-  {
-    "key": "alt+cmd+n",
-    "command": "workbench.action.chat.openInNewWindow"
-  },
-  {
-    "key": "alt+cmd+u",
-    "command": "workbench.action.chat.openInEditor"
-  }
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\u001b\r"
+    },
+    "when": "terminalFocus"
+}
 ]

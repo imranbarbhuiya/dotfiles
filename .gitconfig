@@ -3,6 +3,7 @@
 [user]
 	name = parbez
 	email = imranbarbhuiya.fsd@gmail.com
+	signingkey = 0EC9D6A68563A2CD
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

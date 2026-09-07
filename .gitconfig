@@ -21,17 +21,14 @@
 	autocrlf = false
 	ignorecase = false
 	symlinks = true
-	excludesfile = /Users/imranhussain/.gitignore
+	excludesfile = ~/.gitignore
 [alias]
-  # List all available aliases
-  alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
-  # Delete all local branches but main and the current one, only if they are fully merged with main.
-  br-delete-useless = !git branch | grep -v "main" | grep -v ^* | xargs -r git branch -d
-  # Checkout
-  co = checkout
+    alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+    br-delete-useless = "!f() { current=$(git branch --show-current); git branch --merged main --format='%(refname:short)' | while IFS= read -r branch; do if [ \"$branch\" != \"main\" ] && [ \"$branch\" != \"$current\" ]; then git branch -d \"$branch\"; fi; done; }; f"
+    co = checkout
+    undo = reset --soft HEAD^
+    yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
 
-  undo = reset --soft HEAD^
-  yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
 [push]
     autoSetupRemote = true
     followTags = true

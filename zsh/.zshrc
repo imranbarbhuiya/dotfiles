@@ -39,8 +39,4 @@ export PATH
 
 eval "$(fnm env --use-on-cd --corepack-enabled --shell zsh)"
 
-alias cltec="CLAUDE_CONFIG_DIR=$HOME/.claude-tec claude"
-alias clsofi="CLAUDE_CONFIG_DIR=$HOME/.claude-sofi claude"
-alias clzethy="CLAUDE_CONFIG_DIR=$HOME/.claude-zethy claude"
-
 eval "$(starship init zsh)"

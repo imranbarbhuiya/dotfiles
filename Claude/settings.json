@@ -4,7 +4,6 @@
   "enableArtifact": false,
   "includeCoAuthoredBy": false,
   "tui": "fullscreen",
-  "agentPushNotifEnabled": true,
   "remoteControlAtStartup": false,
   "syncClaudeAiSkills": false,
   "syncClaudeAiPlugins": false,

@@ -17,10 +17,6 @@ sessions/
 *.log
 *.sock
 
-# Generated Herdr and agent integrations
-.plugins.lock
-herdr-agent-state.sh
-
 # Tool caches and dependencies
 node_modules/
 .cache/

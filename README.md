@@ -13,7 +13,6 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 - Rust/Cargo
 - Android Studio JBR + Android SDK
 - Claude Code
-- Herdr
 
 ## Files
 
@@ -25,7 +24,6 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `.gitignore` | Local and sensitive state exclusions |
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
-| `herdr/` | Herdr configuration and notes |
 | `Claude/` | Generic Claude Code defaults and global instructions |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
@@ -62,12 +60,6 @@ Starship reads `~/.config/starship.toml` when rendering the prompt, so Starship-
 The `Claude/` directory contains public-safe generic configuration only. Authentication, sessions, history, MCP state, and device-specific state are intentionally excluded.
 
 For setup details, see `Claude/README.md`.
-
-## Herdr
-
-The `herdr/` directory contains the terminal workspace configuration and setup notes for supported agent integrations.
-
-For setup details, see `herdr/README.md`.
 
 ## Notes
 

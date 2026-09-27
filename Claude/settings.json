@@ -3,5 +3,10 @@
   "theme": "auto",
   "enableArtifact": false,
   "includeCoAuthoredBy": false,
-  "cleanupPeriodDays": 7
+  "tui": "fullscreen",
+  "agentPushNotifEnabled": true,
+  "remoteControlAtStartup": false,
+  "syncClaudeAiSkills": false,
+  "syncClaudeAiPlugins": false,
+  "disableClaudeAiConnectors": true
 }

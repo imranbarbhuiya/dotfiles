@@ -24,7 +24,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `.gitignore` | Local and sensitive state exclusions |
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
-| `Claude/` | Generic Claude Code defaults and global instructions |
+| `Claude/` | Generic Claude Code defaults, global instructions, and personal/work launchers |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
 | `parbez-renovate.json` | Shared Renovate preset |
@@ -59,7 +59,7 @@ Starship reads `~/.config/starship.toml` when rendering the prompt, so Starship-
 
 The `Claude/` directory contains public-safe generic configuration only. Authentication, sessions, history, MCP state, and device-specific state are intentionally excluded.
 
-For setup details, see `Claude/README.md`.
+The `clpersonal` and `clwork` executables select separate config directories and forward all Claude arguments without shell aliases. For setup details, see `Claude/README.md`.
 
 ## Notes
 

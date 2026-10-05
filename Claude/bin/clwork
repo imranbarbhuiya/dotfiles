@@ -1,0 +1,3 @@
+#!/bin/sh
+export CLAUDE_CONFIG_DIR="$HOME/.claude-work"
+exec claude "$@"

@@ -1,0 +1,36 @@
+onboarding = false
+
+[terminal]
+default_shell = "zsh"
+shell_mode = "auto"
+new_cwd = "follow"
+kitty_graphics = false
+
+[keys]
+prefix = "ctrl+semicolon"
+detach = "prefix+q"
+focus_agent = "prefix+alt+1..9"
+switch_tab = "prefix+1..9"
+switch_workspace = "prefix+shift+1..9"
+split_vertical = "prefix+backslash"
+split_horizontal = "prefix+enter"
+zoom = "prefix+m"
+resize_mode = "prefix+shift+r"
+
+[theme]
+name = "terminal"
+
+[ui]
+sidebar_width = 32
+prompt_new_workspace_name = true
+agent_panel_sort = "priority"
+status_indicators = "symbols"
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = true
+
+[ui.toast]
+delivery = "system"
+delay_seconds = 1
+
+[session]
+resume_agents_on_restore = false

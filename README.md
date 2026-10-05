@@ -25,6 +25,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
 | `Claude/` | Generic Claude Code defaults, global instructions, and personal/work launchers |
+| `herdr/` | Optional agent management, Ghostty keybindings, and profile-aware setup guidance |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
 | `parbez-renovate.json` | Shared Renovate preset |
@@ -60,6 +61,10 @@ Starship reads `~/.config/starship.toml` when rendering the prompt, so Starship-
 The `Claude/` directory contains public-safe generic configuration only. Authentication, sessions, history, MCP state, and device-specific state are intentionally excluded.
 
 The `clpersonal` and `clwork` executables select separate config directories and forward all Claude arguments without shell aliases. For setup details, see `Claude/README.md`.
+
+## Herdr
+
+For optional terminal agent management, see `herdr/README.md`. The configuration keeps agents running on detach and disables automatic agent restart after a server stop to preserve explicit Claude profile selection. Individual managed agents can also be viewed in native Ghostty tabs.
 
 ## Notes
 

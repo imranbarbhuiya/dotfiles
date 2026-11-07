@@ -22,8 +22,6 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `bash/` | Bash/profile startup files |
 | `git/global-ignore` | Global Git ignore patterns |
 | `gh/config.yml` | GitHub CLI preferences without authentication |
-| `nvim/` | Neovim configuration and plugin lockfile |
-| `zed/settings.json` | Zed editor preferences |
 | `Codex/` | Portable Codex settings and shared agent instructions |
 | `starship.toml` | Starship prompt and Git status styling |
 | `.gitconfig` | Global Git behavior, signing, aliases, rebase and diff defaults |
@@ -31,7 +29,6 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
 | `Claude/` | Shared Claude Code defaults, global instructions, launchers, and skill sync/doctor commands |
-| `herdr/` | Optional agent management, Ghostty keybindings, and profile-aware setup guidance |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
 | `parbez-renovate.json` | Shared Renovate preset |
@@ -68,10 +65,6 @@ The `Claude/` directory contains public-safe generic configuration only. Authent
 
 The `clpersonal` and `clwork` executables select separate config directories and forward all Claude arguments without shell aliases. The shared settings use Concise output. `skills-sync` links `~/.agents/skills` into all local Claude profiles, and `skills-doctor` checks their links without changes. For setup details, see `Claude/README.md`.
 
-## Herdr
-
-For optional terminal agent management, see `herdr/README.md`. The configuration keeps agents running on detach and disables automatic agent restart after a server stop to preserve explicit Claude profile selection. Individual managed agents can also be viewed in native Ghostty tabs.
-
 ## Notes
 
 Secrets, authentication state, local agent state, sessions, databases, logs, sockets, caches, and `.env` files are intentionally excluded from the repository.
@@ -91,8 +84,6 @@ For the other configs, copy or link the matching paths after reviewing them:
 | `bash/.bashrc`, `bash/.bash_profile`, `bash/.profile` | Corresponding files in `~` |
 | `git/global-ignore` | `~/.gitignore` |
 | `gh/config.yml` | `~/.config/gh/config.yml` |
-| `nvim/` | `~/.config/nvim/` |
-| `zed/settings.json` | `~/.config/zed/settings.json` |
 | `vscode-settings.json`, `vscode-keybindings.json` | Cursor or VS Code user settings/keybindings |
 | `Codex/config.toml` | Merge into `~/.codex/config.toml` |
 | `Codex/AGENTS.md` | Global agent instructions, for example `~/.codex/AGENTS.md` |
@@ -103,4 +94,4 @@ configs, private project permissions, app-managed paths, and conversation/runtim
 state remain local. OpenCode custom-provider settings and service credentials,
 package-manager auth-only files, and generated shell integrations are excluded.
 Ghostty currently uses its defaults; its generated comment-only
-template is not copied. The existing Herdr and Windows configs are retained.
+template is not copied. The existing Windows configs are retained.

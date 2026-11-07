@@ -1,5 +1,0 @@
-require("imranbarbhuiya.options")
-require("imranbarbhuiya.lazy")
-require("imranbarbhuiya.keymaps")
-require("imranbarbhuiya.highlight_yank")
-require("imranbarbhuiya.copy_file_path_to_clipboard")

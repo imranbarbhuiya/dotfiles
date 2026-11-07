@@ -57,13 +57,13 @@ Keep each profile's authentication and conversation state outside this repositor
 
 ## Bash guard hook
 
-`settings.json` registers `~/.claude/hooks/guard-bash` for every Bash call. Each
-profile's `hooks` directory is a symlink to `~/.claude/hooks`, so one link covers
-all profiles. Requires Python 3.
+`settings.json` registers `~/.claude/hooks/guard-bash` for every Bash call.
+`~/.claude/hooks` is a symlink to this repo's `Claude/hooks`, and each profile's
+`hooks` is a symlink to `~/.claude/hooks`, so hooks added here reach every
+profile. Requires Python 3.
 
 ```sh
-mkdir -p "$HOME/.claude/hooks"
-ln -sf "$PWD/Claude/hooks/guard-bash" "$HOME/.claude/hooks/guard-bash"
+ln -sfn "$PWD/Claude/hooks" "$HOME/.claude/hooks"
 ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-personal/hooks"
 ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-work/hooks"
 ```

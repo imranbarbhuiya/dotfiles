@@ -10,7 +10,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 - JetBrainsMono Nerd Font
 - fnm for Node.js
 - Bun
-- Rust/Cargo
+- Python 3 for shared skill commands
 - Android Studio JBR + Android SDK
 - Claude Code
 
@@ -39,7 +39,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 Install the main tools:
 
 ```sh
-brew install starship fnm bun
+brew install starship fnm bun python@3.14
 brew install --cask font-jetbrains-mono-nerd-font
 ```
 

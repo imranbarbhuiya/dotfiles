@@ -4,11 +4,6 @@
 	name = parbez
 	email = imranbarbhuiya.fsd@gmail.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaQ+xwO+1Dj22nk8BtTS2O42rLc96Ul0AH7xJhWqDhC
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [commit]
 	gpgsign = true
 [tag]

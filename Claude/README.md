@@ -10,6 +10,7 @@ intentionally excluded.
 - `settings.json` — shared defaults: Concise output, extended-context Opus, fullscreen TUI, local Figma/context-bar plugins, Remote Control off at startup, and no claude.ai skill/plugin sync or connectors
 - `bin/skills-sync` — link shared skills into every local Claude profile
 - `bin/skills-doctor` — inspect missing skills, conflicts, invalid skills, and stale links without changing files
+- `hooks/guard-bash` — PreToolUse hook that blocks `--no-verify` on git commit/push/merge/rebase, and `git worktree remove` on a worktree with uncommitted work (untracked symlinks such as a linked `node_modules` are ignored)
 
 
 ## Personal and work profiles
@@ -53,6 +54,22 @@ clwork --resume <session-id>
 ```
 
 Keep each profile's authentication and conversation state outside this repository.
+
+## Bash guard hook
+
+`settings.json` registers `~/.claude/hooks/guard-bash` for every Bash call. Each
+profile's `hooks` directory is a symlink to `~/.claude/hooks`, so one link covers
+all profiles. Requires Python 3.
+
+```sh
+mkdir -p "$HOME/.claude/hooks"
+ln -sf "$PWD/Claude/hooks/guard-bash" "$HOME/.claude/hooks/guard-bash"
+ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-personal/hooks"
+ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-work/hooks"
+```
+
+For existing profiles, merge the `hooks.PreToolUse` entry from `settings.json`
+into each profile's settings.
 
 ## Concise output
 
@@ -100,8 +117,7 @@ also returns status 1 for unresolved conflicts or invalid source entries.
 ## Local settings excluded from this snapshot
 
 The shared defaults omit the app-managed `CLAUDE_CODE_ENTRYPOINT` environment
-variable, private project-specific auto-mode permissions and environment descriptions. Empty hook objects add no
-behavior and are omitted. These stay in the local profile settings; exporting
+variable, private project-specific auto-mode permissions and environment descriptions. These stay in the local profile settings; exporting
 them verbatim would publish account or internal project details.
 
 Other preferences used locally can be merged individually without recording

@@ -50,6 +50,42 @@ normal install when it would point the worktree back at the main checkout or bre
 - a worktree that needs different dependencies
 - Bun projects, where `bun install` clones files instead of copying them and costs almost no disk
 
+Before removing a worktree, check `git -C <path> status --porcelain`. If anything there is work, commit it or ask me first.
+
+## Shipping
+
+When I ask you to push, merge or deploy, do it without asking me to confirm again, in every repo the task touches, backend repos included. Still ask before force-pushing a shared branch or touching prod beyond what I asked for.
+
+- Never pass `--no-verify`. If a hook fails, fix what it reports.
+- Keep commit subjects to 72 characters or fewer and put details in the body.
+- When an app change depends on a backend change, confirm the backend change is live on the target environment before shipping the app build or OTA update.
+
+## Shell
+
+The Bash tool runs zsh, which breaks bash habits quietly:
+- unquoted `$VAR` is not word-split, so `for x in $LIST` runs once with the whole string
+- an unmatched glob is an error, not a literal
+- a word starting with `=` expands to a command path, so `echo ==x` fails
+
+Run anything with loops, arrays or variable expansion as `bash -c '...'` or a bash script.
+
+In helper scripts, use `set -euo pipefail`. Before trusting a check (a grep for a secret, a UI selector, a status probe), run it once against the real output and confirm it matches. A check that can't fail proves nothing.
+
+## Dependencies and lockfiles
+
+Only re-resolve a lockfile when the task is a dependency change. Otherwise install with the frozen flag (`bun install --frozen-lockfile`, `npm ci`, `pnpm install --frozen-lockfile`, `uv sync --locked`). If a lockfile changes unexpectedly, revert it before committing.
+
+## Targets and environment
+
+- Before branch operations or kubectl, confirm the repo and kube context you are acting on and name them in your message.
+- CI or deploy failures with DNS, TLS handshake, timeout or connection-reset errors are usually the network. Rerun once before changing code.
+- Before long device or simulator testing, check free memory and swap, that Metro and dev servers are alive, and that the backend is reachable. Say up front which platforms can realistically be verified.
+- Don't run evals or other paid model calls in parallel without a cap. Ask before large runs.
+
+## Reporting verification
+
+When a task involved device, CI, deploy or live-backend verification, end with three groups: verified for real, verified only against mocks or tests, and not verified. Give the exact command or step to finish each unverified item.
+
 ## AWS CLI
 
 Never use the AWS CLI for anything that isn't read-only, and even read-only commands only after I approve them. No creating, changing or deleting resources (IAM users, keys, SES identities, S3, DNS, anything), even if credentials are on the machine and a task seems to need it — tell me what's needed and let me do it or decide.

@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+import json
+import os
+import shlex
+import subprocess
+import sys
+
+SEPARATORS = {"&&", "||", ";", "|", "&"}
+
+
+def block(reason):
+    print(reason, file=sys.stderr)
+    sys.exit(2)
+
+
+def segments(command):
+    try:
+        lexer = shlex.shlex(command, posix=True, punctuation_chars=True)
+        lexer.whitespace_split = True
+        tokens = list(lexer)
+    except ValueError:
+        return []
+    current = []
+    for token in tokens:
+        if token in SEPARATORS:
+            if current:
+                yield current
+            current = []
+        else:
+            current.append(token)
+    if current:
+        yield current
+
+
+def git_args(tokens):
+    if "git" not in tokens:
+        return None, None
+    args = tokens[tokens.index("git") + 1 :]
+    repo = None
+    while args and args[0].startswith("-"):
+        if args[0] == "-C" and len(args) > 1:
+            repo = args[1]
+            args = args[2:]
+        elif args[0] == "-c" and len(args) > 1:
+            args = args[2:]
+        else:
+            args = args[1:]
+    return args, repo
+
+
+def unsaved_work(path):
+    result = subprocess.run(
+        ["git", "-C", path, "status", "--porcelain"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return []
+    entries = []
+    for line in result.stdout.splitlines():
+        entry = os.path.join(path, line[3:].strip('"').rstrip("/"))
+        if line.startswith("??") and os.path.islink(entry):
+            continue
+        entries.append(line)
+    return entries
+
+
+def check(tokens, cwd):
+    args, repo = git_args(tokens)
+    if not args:
+        return
+    subcommand = args[0]
+
+    if subcommand in {"commit", "push", "merge", "rebase", "cherry-pick"} and "--no-verify" in args:
+        block("Blocked: --no-verify skips the repo's hooks. Fix what the hook reports instead.")
+
+    if subcommand == "worktree" and len(args) > 1 and args[1] == "remove":
+        targets = [a for a in args[2:] if not a.startswith("-")]
+        base = os.path.join(cwd, repo) if repo else cwd
+        for target in targets:
+            path = os.path.normpath(os.path.join(base, os.path.expanduser(target)))
+            if not os.path.isdir(path):
+                continue
+            dirty = unsaved_work(path)
+            if dirty:
+                listing = "\n".join(dirty[:20])
+                block(
+                    f"Blocked: worktree {path} has uncommitted work:\n{listing}\n"
+                    "Commit it, or ask the user before discarding it."
+                )
+
+
+def main():
+    payload = json.load(sys.stdin)
+    command = payload.get("tool_input", {}).get("command", "")
+    cwd = payload.get("cwd") or os.getcwd()
+    for tokens in segments(command):
+        check(tokens, cwd)
+
+
+main()

@@ -20,5 +20,18 @@
         "repo": "imranbarbhuiya/claude-context-bar"
       }
     }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/guard-bash"
+          }
+        ]
+      }
+    ]
   }
 }

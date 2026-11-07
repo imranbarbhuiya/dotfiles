@@ -1,8 +1,9 @@
 # Codex
 
 `config.toml` records the current model, reasoning effort, service tier, feature
-flags, and plugin preferences. `AGENTS.md` shares the global coding instructions
-with the Claude configuration.
+flags, and plugin preferences. Shared agent instructions are stored at
+[`../.agents/AGENTS.md`](../.agents/AGENTS.md), matching the local source. There is
+no `Codex/AGENTS.md` because the local `~/.codex/AGENTS.md` does not exist.
 
 Merge these settings into `~/.codex/config.toml`; do not replace an existing file.
 Local marketplace paths and plugin availability are managed by the installed

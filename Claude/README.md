@@ -6,7 +6,7 @@ intentionally excluded.
 
 ## Contents
 
-- `CLAUDE.md` — global instructions
+- `CLAUDE.md` — symlink to the exact local instructions in `../.agents/AGENTS.md`
 - `settings.json` — shared defaults: Concise output, extended-context Opus, fullscreen TUI, local Figma/context-bar plugins, Remote Control off at startup, and no claude.ai skill/plugin sync or connectors
 - `bin/skills-sync` — link shared skills into every local Claude profile
 - `bin/skills-doctor` — inspect missing skills, conflicts, invalid skills, and stale links without changing files
@@ -22,15 +22,21 @@ with Claude. No shell aliases are required.
 From the repository root, copy the shared defaults and link the launchers:
 
 ```sh
-mkdir -p "$HOME/.local/bin" "$HOME/.claude-personal" "$HOME/.claude-work"
-cp -n Claude/settings.json Claude/CLAUDE.md "$HOME/.claude-personal/"
-cp -n Claude/settings.json Claude/CLAUDE.md "$HOME/.claude-work/"
+mkdir -p "$HOME/.local/bin" "$HOME/.agents" "$HOME/.claude" "$HOME/.claude-personal" "$HOME/.claude-work"
+cp -n .agents/AGENTS.md "$HOME/.agents/AGENTS.md"
+ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+cp -n Claude/settings.json "$HOME/.claude-personal/"
+cp -n Claude/settings.json "$HOME/.claude-work/"
+ln -sfn "$HOME/.claude/CLAUDE.md" "$HOME/.claude-personal/CLAUDE.md"
+ln -sfn "$HOME/.claude/CLAUDE.md" "$HOME/.claude-work/CLAUDE.md"
 ln -sf "$PWD/Claude/bin/clpersonal" "$HOME/.local/bin/clpersonal"
 ln -sf "$PWD/Claude/bin/clwork" "$HOME/.local/bin/clwork"
 ```
 
 The included Zsh configuration already adds `~/.local/bin` to `PATH`. Open a new
 terminal tab after installing it. The copy commands keep existing profile files.
+The instruction links mirror the local chain: `~/.agents/AGENTS.md` → `~/.claude/CLAUDE.md` → each profile's
+`CLAUDE.md`. The repository uses a relative link so it works in any checkout.
 
 Start each profile and sign in separately when prompted:
 

@@ -22,7 +22,8 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `bash/` | Bash/profile startup files |
 | `git/global-ignore` | Global Git ignore patterns |
 | `gh/config.yml` | GitHub CLI preferences without authentication |
-| `Codex/` | Portable Codex settings and shared agent instructions |
+| `Codex/` | Portable Codex settings |
+| `.agents/AGENTS.md` | Exact local shared agent instructions |
 | `starship.toml` | Starship prompt and Git status styling |
 | `.gitconfig` | Global Git behavior, signing, aliases, rebase and diff defaults |
 | `.gitignore` | Local and sensitive state exclusions |
@@ -86,7 +87,8 @@ For the other configs, copy or link the matching paths after reviewing them:
 | `gh/config.yml` | `~/.config/gh/config.yml` |
 | `vscode-settings.json`, `vscode-keybindings.json` | Cursor or VS Code user settings/keybindings |
 | `Codex/config.toml` | Merge into `~/.codex/config.toml` |
-| `Codex/AGENTS.md` | Global agent instructions, for example `~/.codex/AGENTS.md` |
+| `.agents/AGENTS.md` | `~/.agents/AGENTS.md` |
+| `Claude/CLAUDE.md` | Symlink to the shared instructions; see `Claude/README.md` |
 
 This repository is a reviewed snapshot, not an automatic uploader. Review local
 changes before committing them. Package-manager authentication files, SSH host

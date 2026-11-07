@@ -7,7 +7,9 @@ intentionally excluded.
 ## Contents
 
 - `CLAUDE.md` — global instructions
-- `settings.json` — common settings without account-specific extensions: Remote Control off at startup, fullscreen TUI, and no claude.ai skill/plugin sync or connectors (only locally installed plugins and MCP servers load)
+- `settings.json` — shared defaults: Concise output, extended-context Opus, fullscreen TUI, local Figma/context-bar plugins, Remote Control off at startup, and no claude.ai skill/plugin sync or connectors
+- `bin/skills-sync` — link shared skills into every local Claude profile
+- `bin/skills-doctor` — inspect missing skills, conflicts, invalid skills, and stale links without changing files
 
 
 ## Personal and work profiles
@@ -45,3 +47,46 @@ clwork --resume <session-id>
 ```
 
 Keep each profile's authentication and conversation state outside this repository.
+
+## Concise output
+
+The shared settings select Claude Code's built-in Concise output style with
+`"outputStyle": "Concise"`. Use Claude Code v2.1.237 or later. For existing
+profiles, merge this field into each profile's `settings.json`; keep its other
+settings and authentication state. New profiles can start from the shared
+settings above. Project settings can override the user-level output style.
+
+## Shared skills
+
+Keep skill contents in `~/.agents/skills`. Install them directly with the
+upstream CLI; no `skills` shell function or alias is needed:
+
+```sh
+npx skills add <owner/repo> -g -a codex
+```
+
+From the repository root, install the sync and doctor commands:
+
+```sh
+mkdir -p "$HOME/.local/bin"
+ln -sf "$PWD/Claude/bin/skills-sync" "$HOME/.local/bin/skills-sync"
+ln -sf "$PWD/Claude/bin/skills-doctor" "$HOME/.local/bin/skills-doctor"
+```
+
+Both commands require Python 3 and discover `~/.claude` plus existing
+`~/.claude-*` directories automatically; no account names are configured.
+
+```sh
+skills-sync
+skills-doctor
+```
+
+Run sync after adding, updating, or removing skills, or creating a profile. It
+links directories containing `SKILL.md`, preserves local overrides and unrelated
+symlinks, and removes stale links pointing to the shared skills directory.
+Profile-only skills remain local; move them into `~/.agents/skills` to share them.
+Codex uses that shared directory directly.
+
+Doctor does not change files. It exits with status 1 when it finds missing,
+invalid, conflicting, or stale entries; otherwise it exits with status 0. Sync
+also returns status 1 for unresolved conflicts or invalid source entries.

@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+import os
+from pathlib import Path
+import sys
+
+
+def main():
+    doctor = Path(sys.argv[0]).name == 'skills-doctor'
+    if len(sys.argv) != 1:
+        print(f'Usage: {Path(sys.argv[0]).name}', file=sys.stderr)
+        return 2
+    home = Path.home()
+    source = home / '.agents/skills'
+    if not source.is_dir():
+        print(f'Missing source: {source}', file=sys.stderr)
+        return 1
+    skills = {p.name: p for p in sorted(source.iterdir())
+              if not p.name.startswith('.') and (p / 'SKILL.md').is_file()}
+    issues = 0
+    for entry in sorted(source.iterdir()):
+        if not entry.name.startswith('.') and entry.name not in skills:
+            print(f'INVALID SOURCE: {entry} (no SKILL.md)')
+            issues += 1
+    profiles = [home / '.claude'] + sorted(p for p in home.glob('.claude-*') if p.is_dir())
+    changed = 0
+    for profile in profiles:
+        directory = profile / 'skills'
+        if not doctor:
+            directory.mkdir(parents=True, exist_ok=True)
+        missing = conflicts = stale = 0
+        for name, skill in skills.items():
+            link = directory / name
+            if link.is_symlink() and link.resolve() == skill.resolve():
+                continue
+            if link.is_symlink() or link.exists():
+                print(f'CONFLICT: {link} (preserved)')
+                conflicts += 1
+            elif doctor:
+                print(f'MISSING: {link}')
+                missing += 1
+            else:
+                link.symlink_to(skill, target_is_directory=True)
+                changed += 1
+        if directory.is_dir():
+            for link in sorted(directory.iterdir()):
+                if link.name.startswith('.') or link.name in skills:
+                    continue
+                target = Path(os.path.abspath(link.parent / link.readlink())) if link.is_symlink() else None
+                if target == source / link.name:
+                    if doctor:
+                        print(f'STALE: {link}')
+                        stale += 1
+                    else:
+                        link.unlink()
+                        changed += 1
+                else:
+                    print(f'LOCAL: {link} (preserved)')
+                    if doctor and not (link / 'SKILL.md').is_file():
+                        print(f'INVALID LOCAL: {link} (no SKILL.md)')
+                        conflicts += 1
+        issues += missing + conflicts + stale
+        print(f'{profile.name}: {len(skills)} shared skills, {missing} missing, {conflicts} conflicts, {stale} stale')
+    if not doctor:
+        print(f'Sync complete: {changed} links changed.')
+    return 1 if issues else 0
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main())
+    except OSError as error:
+        print(f'{Path(sys.argv[0]).name}: {error}', file=sys.stderr)
+        sys.exit(1)

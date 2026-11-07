@@ -1,5 +1,5 @@
 {
-  "model": "opus",
+  "model": "opus[1m]",
   "theme": "auto",
   "enableArtifact": false,
   "includeCoAuthoredBy": false,
@@ -7,5 +7,18 @@
   "remoteControlAtStartup": false,
   "syncClaudeAiSkills": false,
   "syncClaudeAiPlugins": false,
-  "disableClaudeAiConnectors": true
+  "disableClaudeAiConnectors": true,
+  "outputStyle": "Concise",
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true,
+    "context-bar@claude-context-bar": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-context-bar": {
+      "source": {
+        "source": "github",
+        "repo": "imranbarbhuiya/claude-context-bar"
+      }
+    }
+  }
 }

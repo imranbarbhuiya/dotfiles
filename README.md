@@ -24,7 +24,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `.gitignore` | Local and sensitive state exclusions |
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
-| `Claude/` | Generic Claude Code defaults, global instructions, and personal/work launchers |
+| `Claude/` | Shared Claude Code defaults, global instructions, launchers, and skill sync/doctor commands |
 | `herdr/` | Optional agent management, Ghostty keybindings, and profile-aware setup guidance |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
@@ -60,7 +60,7 @@ Starship reads `~/.config/starship.toml` when rendering the prompt, so Starship-
 
 The `Claude/` directory contains public-safe generic configuration only. Authentication, sessions, history, MCP state, and device-specific state are intentionally excluded.
 
-The `clpersonal` and `clwork` executables select separate config directories and forward all Claude arguments without shell aliases. For setup details, see `Claude/README.md`.
+The `clpersonal` and `clwork` executables select separate config directories and forward all Claude arguments without shell aliases. The shared settings use Concise output. `skills-sync` links `~/.agents/skills` into all local Claude profiles, and `skills-doctor` checks their links without changes. For setup details, see `Claude/README.md`.
 
 ## Herdr
 

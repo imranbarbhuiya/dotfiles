@@ -25,7 +25,6 @@ typeset -U path PATH
 path=(
     "$HOME/.cargo/bin"
     "$BUN_INSTALL/bin"
-    "$HOME/.opencode/bin"
     "$HOME/.local/bin"
     "$JAVA_HOME/bin"
     "$ANDROID_HOME/emulator"
@@ -39,4 +38,8 @@ export PATH
 
 eval "$(fnm env --use-on-cd --corepack-enabled --shell zsh)"
 
+
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

@@ -41,6 +41,8 @@ The Bash tool runs zsh, which breaks bash habits quietly:
 
 Run anything with loops, arrays or variable expansion as `bash -c '...'` or a bash script.
 
+Search code with `rg` (`rg --files` to list files) rather than `grep -r` or `find | xargs grep`. It skips gitignored paths like `node_modules` and is much faster.
+
 In helper scripts, use `set -euo pipefail`. Before trusting a check (a grep for a secret, a UI selector, a status probe), run it once against the real output and confirm it matches.
 
 ## Dependencies and lockfiles

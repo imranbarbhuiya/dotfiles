@@ -71,8 +71,12 @@ def check(tokens, cwd):
         return
     subcommand = args[0]
 
-    if subcommand in {"commit", "push", "merge", "rebase", "cherry-pick"} and "--no-verify" in args:
-        block("Blocked: --no-verify skips the repo's hooks. Fix what the hook reports instead.")
+    allowed = "ALLOW_NO_VERIFY=1" in tokens[: tokens.index("git")]
+    if subcommand in {"commit", "push", "merge", "rebase", "cherry-pick"} and "--no-verify" in args and not allowed:
+        block(
+            "Blocked: --no-verify skips the repo's hooks. Fix what the hook reports instead. "
+            "Only if the user asked for or allowed --no-verify, rerun with ALLOW_NO_VERIFY=1 before git."
+        )
 
     if subcommand == "worktree" and len(args) > 1 and args[1] == "remove":
         targets = [a for a in args[2:] if not a.startswith("-")]

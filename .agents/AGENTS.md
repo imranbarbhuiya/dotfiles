@@ -54,11 +54,11 @@ Before removing a worktree, check `git -C <path> status --porcelain`. If anythin
 
 ## Shipping
 
-When I ask you to push, merge or deploy, do it without asking me to confirm again, in every repo the task touches, backend repos included. Still ask before force-pushing a shared branch or touching prod beyond what I asked for.
+When I ask you to push, merge or deploy, do it without asking me to confirm again, in every repo the task touches, including linked repos we're working on together. Still ask before force-pushing a shared branch or touching prod beyond what I asked for.
 
-- Never pass `--no-verify`. If a hook fails, fix what it reports.
+- Don't pass `--no-verify` on your own. If a hook fails, fix what it reports. When I ask for or allow `--no-verify`, prefix the git command with `ALLOW_NO_VERIFY=1` so the guard hook lets it through.
 - Keep commit subjects to 72 characters or fewer and put details in the body.
-- When an app change depends on a backend change, confirm the backend change is live on the target environment before shipping the app build or OTA update.
+- When a change depends on a change in a linked repo, confirm that change is live on the target environment before shipping the dependent build or release.
 
 ## Shell
 

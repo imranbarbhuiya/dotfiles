@@ -10,7 +10,7 @@ intentionally excluded.
 - `settings.json` — shared defaults: Concise output, extended-context Opus, fullscreen TUI, local Figma/context-bar plugins, Remote Control off at startup, and no claude.ai skill/plugin sync or connectors
 - `bin/skills-sync` — link shared skills into every local Claude profile
 - `bin/skills-doctor` — inspect missing skills, conflicts, invalid skills, and stale links without changing files
-- `hooks/guard-bash` — PreToolUse hook that blocks `--no-verify` on git commit/push/merge/rebase, and `git worktree remove` on a worktree with uncommitted work (untracked symlinks such as a linked `node_modules` are ignored)
+- `hooks/guard-bash` — PreToolUse hook that blocks `--no-verify` on git commit/push/merge/rebase unless prefixed with `ALLOW_NO_VERIFY=1`, and `git worktree remove` on a worktree with uncommitted work (untracked symlinks such as a linked `node_modules` are ignored)
 
 
 ## Personal and work profiles

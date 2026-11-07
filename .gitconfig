@@ -3,7 +3,7 @@
 [user]
 	name = parbez
 	email = imranbarbhuiya.fsd@gmail.com
-	signingkey = 0EC9D6A68563A2CD
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaQ+xwO+1Dj22nk8BtTS2O42rLc96Ul0AH7xJhWqDhC
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -52,3 +52,16 @@
 [status]
     short = true
     branch = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.ssh/allowed_signers
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential

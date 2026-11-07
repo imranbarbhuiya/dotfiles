@@ -1,4 +1,5 @@
 {
+  "remote.SSH.path": "/usr/bin/ssh",
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
     "editor.suggest.insertMode": "replace",
@@ -57,7 +58,6 @@
     "**/node_modules/*/**": true,
     "**/target/**": true,
   },
-  "git.autofetch": true,
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
   "git.ignoreRebaseWarning": true,
@@ -121,4 +121,6 @@
   "window.autoDetectColorScheme": true,
   "cursor.composer.codeBlockWordWrap": true,
   "workbench.editor.enablePreview": false,
+  "cursor.composer.queueManualSendBehavior2": "steer",
+  "remote.autoForwardPortsSource": "hybrid",
 }

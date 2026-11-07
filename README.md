@@ -18,7 +18,13 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 
 | Path | Purpose |
 | --- | --- |
-| `zsh/.zshrc` | Zsh, PATH, fnm, Bun, and Starship |
+| `zsh/` | Zsh startup files, PATH, fnm, Bun, and Starship |
+| `bash/` | Bash/profile startup files |
+| `git/global-ignore` | Global Git ignore patterns |
+| `gh/config.yml` | GitHub CLI preferences without authentication |
+| `nvim/` | Neovim configuration and plugin lockfile |
+| `zed/settings.json` | Zed editor preferences |
+| `Codex/` | Portable Codex settings and shared agent instructions |
 | `starship.toml` | Starship prompt and Git status styling |
 | `.gitconfig` | Global Git behavior, signing, aliases, rebase and diff defaults |
 | `.gitignore` | Local and sensitive state exclusions |
@@ -69,3 +75,32 @@ For optional terminal agent management, see `herdr/README.md`. The configuration
 ## Notes
 
 Secrets, authentication state, local agent state, sessions, databases, logs, sockets, caches, and `.env` files are intentionally excluded from the repository.
+
+## Additional development configs
+
+The editor settings mirror Cursor's user settings and keybindings. Private SSH
+host mappings are omitted from the editor snapshot. Git configuration includes
+SSH signing through 1Password and GitHub CLI credential-helper commands; it
+contains a public signing key, not private key material.
+
+For the other configs, copy or link the matching paths after reviewing them:
+
+| Repository path | Local destination |
+| --- | --- |
+| `zsh/.zprofile`, `zsh/.zshenv` | `~/.zprofile`, `~/.zshenv` |
+| `bash/.bashrc`, `bash/.bash_profile`, `bash/.profile` | Corresponding files in `~` |
+| `git/global-ignore` | `~/.gitignore` |
+| `gh/config.yml` | `~/.config/gh/config.yml` |
+| `nvim/` | `~/.config/nvim/` |
+| `zed/settings.json` | `~/.config/zed/settings.json` |
+| `vscode-settings.json`, `vscode-keybindings.json` | Cursor or VS Code user settings/keybindings |
+| `Codex/config.toml` | Merge into `~/.codex/config.toml` |
+| `Codex/AGENTS.md` | Global agent instructions, for example `~/.codex/AGENTS.md` |
+
+This repository is a reviewed snapshot, not an automatic uploader. Review local
+changes before committing them. Package-manager authentication files, SSH host
+configs, private project permissions, app-managed paths, and conversation/runtime
+state remain local. OpenCode custom-provider settings and service credentials,
+package-manager auth-only files, and generated shell integrations are excluded.
+Ghostty currently uses its defaults; its generated comment-only
+template is not copied. The existing Herdr and Windows configs are retained.

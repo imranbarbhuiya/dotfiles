@@ -90,3 +90,29 @@ Codex uses that shared directory directly.
 Doctor does not change files. It exits with status 1 when it finds missing,
 invalid, conflicting, or stale entries; otherwise it exits with status 0. Sync
 also returns status 1 for unresolved conflicts or invalid source entries.
+
+## Local settings excluded from this snapshot
+
+The shared defaults omit the app-managed `CLAUDE_CODE_ENTRYPOINT` environment
+variable, private project-specific auto-mode permissions and environment descriptions. Empty hook objects add no
+behavior and are omitted. These stay in the local profile settings; exporting
+them verbatim would publish account or internal project details.
+
+Other preferences used locally can be merged individually without recording
+which account uses them:
+
+```json
+{
+  "theme": "dark",
+  "model": "opus",
+  "autoCompactEnabled": true,
+  "switchModelsOnFlag": false,
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  }
+}
+```
+
+This is an optional settings fragment, not another default. Merge the plugin
+entries into the existing `enabledPlugins` object rather than replacing it.

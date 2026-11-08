@@ -12,13 +12,16 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 - Bun
 - Python 3 for shared skill commands
 - Android Studio JBR + Android SDK
+- OrbStack for Docker (memory capped at 8 GB)
+- Homebrew `kubectl`
+- 1Password CLI (`op`) for secrets
 - Claude Code
 
 ## Files
 
 | Path | Purpose |
 | --- | --- |
-| `zsh/` | Zsh startup files, PATH, fnm, Bun, and Starship |
+| `zsh/` | Zsh startup files, PATH, fnm, Bun, Starship, and OrbStack |
 | `bash/` | Bash/profile startup files |
 | `git/global-ignore` | Global Git ignore patterns |
 | `gh/config.yml` | GitHub CLI preferences without authentication |
@@ -29,6 +32,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `.gitignore` | Local and sensitive state exclusions |
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
+| `docker/local-dev/` | Shared local Postgres, Redis, MongoDB, RabbitMQ, and MinIO for every project |
 | `Claude/` | Shared Claude Code defaults, global instructions, launchers, and skill sync/doctor commands |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
@@ -39,8 +43,8 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 Install the main tools:
 
 ```sh
-brew install starship fnm bun python@3.14
-brew install --cask font-jetbrains-mono-nerd-font
+brew install starship fnm bun python@3.14 kubernetes-cli 1password-cli
+brew install --cask font-jetbrains-mono-nerd-font orbstack
 ```
 
 Install Oh My Zsh and `zsh-autosuggestions`, then link or copy the configs to their expected locations:
@@ -59,6 +63,28 @@ exec zsh
 ```
 
 Starship reads `~/.config/starship.toml` when rendering the prompt, so Starship-only changes normally appear on the next prompt without restarting the shell.
+
+## Docker and shared dev services
+
+Docker runs on OrbStack, which returns memory to macOS when containers go idle. Cap it so it
+stays clear of the Android emulator:
+
+```sh
+orb config set memory_mib 8192 && orb stop
+```
+
+`docker/local-dev/` is one shared instance of each backing service, so projects and worktrees
+create a database, vhost, or bucket inside it instead of starting their own containers. Link it
+to the path agents expect and start it:
+
+```sh
+mkdir -p ~/docker
+ln -s "$PWD/docker/local-dev" ~/docker/local-dev
+cd ~/docker/local-dev && docker compose up -d
+```
+
+Ports, credentials, and version pins are in `docker/local-dev/README.md`. The credentials are
+local-only defaults and every port listens on `127.0.0.1`.
 
 ## Claude Code
 
@@ -82,7 +108,7 @@ For the other configs, copy or link the matching paths after reviewing them:
 | Repository path | Local destination |
 | --- | --- |
 | `zsh/.zprofile`, `zsh/.zshenv` | `~/.zprofile`, `~/.zshenv` |
-| `bash/.bashrc`, `bash/.bash_profile`, `bash/.profile` | Corresponding files in `~` |
+| `bash/.bashrc`, `bash/.bash_profile` | Corresponding files in `~` |
 | `git/global-ignore` | `~/.gitignore` |
 | `gh/config.yml` | `~/.config/gh/config.yml` |
 | `vscode-settings.json`, `vscode-keybindings.json` | Cursor or VS Code user settings/keybindings |

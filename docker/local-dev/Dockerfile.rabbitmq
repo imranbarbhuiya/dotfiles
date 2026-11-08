@@ -1,0 +1,9 @@
+FROM rabbitmq:4.2-management-alpine
+
+# rabbitmq_delayed_message_exchange is a community plugin built per server line.
+# v4.2.0 is the newest release, so 4.2.x is the newest server line we can run.
+ADD --chmod=644 \
+    https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v4.2.0/rabbitmq_delayed_message_exchange-4.2.0.ez \
+    $RABBITMQ_HOME/plugins/rabbitmq_delayed_message_exchange-4.2.0.ez
+
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange

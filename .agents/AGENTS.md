@@ -45,6 +45,10 @@ Search code with `rg` (`rg --files` to list files) rather than `grep -r` or `fin
 
 In helper scripts, use `set -euo pipefail`. Before trusting a check (a grep for a secret, a UI selector, a status probe), run it once against the real output and confirm it matches.
 
+## Editing config files
+
+Don't leave backup copies (`*.bak`, `*.orig`, `*.backup-<date>`) when editing config files. Note the old value in your reply, and use git where the file is tracked. If you made a temporary copy, delete it before you finish.
+
 ## Dependencies and lockfiles
 
 Only re-resolve a lockfile when the task is a dependency change. Otherwise install with the frozen flag (`bun install --frozen-lockfile`, `npm ci`, `pnpm install --frozen-lockfile`, `uv sync --locked`). If a lockfile changes unexpectedly, revert it before committing.
@@ -76,6 +80,14 @@ Never use the AWS CLI for anything that isn't read-only, and even read-only comm
 For local web apps and APIs, use the Portless CLI: `portless` for a package `dev` script, `portless run <command>` otherwise and in linked worktrees, and a distinct name per service (`web.project`, `api.project`). Skip it for Metro/Expo/React Native and Vite; run those on the project's own port and say so. Use the Portless URL in browser checks and cross-service config (`portless get <name>`). Don't assume port 3000 or pick ports yourself. If a script ignores the assigned `PORT`, make it honor it and report that.
 
 Report each service's URL, folder and how to stop it, and stop what you started when it's no longer needed. Use `portless list` and `portless prune` for stale routes. Never stop another project's service or `--force` its name.
+
+## Containers, databases and emulators
+
+RAM is tight (24 GB with Docker and an Android emulator running), so keep containers and emulators to what the task needs:
+- Use the shared stack in `~/docker/local-dev` (`docker compose up -d` there; endpoints in its README) instead of starting Postgres, Redis, MongoDB, RabbitMQ or MinIO per project or worktree. Redis is on 6380. Give each project its own Postgres database and role, MongoDB database, Redis DB index or key prefix, RabbitMQ vhost and MinIO bucket. Only clear your own index (`FLUSHDB`, never `FLUSHALL`), and never drop another project's database.
+- Keep each project's connection pool small (about 5–10 locally) so all projects together stay under the shared Postgres's `max_connections`. On "too many connections" errors, shrink pools or end idle sessions instead of starting another container.
+- Give a project its own container only when it needs a different major version, an extension the shared one lacks (pgvector, PostGIS), Redis Cluster, or isolation the task requires. Say why when you do.
+- When a task finishes, `docker compose stop` the stacks you started (not `down -v`, which deletes data), and kill emulators you booted (`adb -s <serial> emu kill`). Leave running anything you didn't start.
 
 ## Screenshots in PRs
 

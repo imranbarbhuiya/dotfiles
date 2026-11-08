@@ -1,0 +1,109 @@
+name: local
+
+services:
+  mongodb:
+    # Pinned to 8.2: mongo:8.3 refuses to start on Linux kernels >= 6.19 (OrbStack's is 7.x),
+    # see https://jira.mongodb.org/browse/SERVER-121912. Revert once 8.3 ships the fix.
+    image: mongo:8.2
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:27017:27017'
+    volumes:
+      - mongodb:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping").ok']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    # Every project shares this instance, so leave room for all their pools.
+    command: ['postgres', '-c', 'max_connections=200']
+    ports:
+      - '127.0.0.1:5432:5432'
+    # postgres:18 sets PGDATA=/var/lib/postgresql/18/docker, so the volume
+    # mounts one level up. Mounting /var/lib/postgresql/data persists nothing.
+    volumes:
+      - postgres:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:8-alpine
+    container_name: redis
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes']
+    # 6379 on the host is often taken by a kubectl port-forward to a remote redis.
+    ports:
+      - '127.0.0.1:6380:6379'
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile.rabbitmq
+    image: local-rabbitmq-delayed:4.2
+    container_name: rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: dev
+      RABBITMQ_DEFAULT_PASS: dev
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - '127.0.0.1:5672:5672'
+      - '127.0.0.1:15672:15672'
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  minio:
+    # MinIO stopped publishing free images (minio/minio is gone from Docker Hub); Chainguard's build is kept current.
+    image: cgr.dev/chainguard/minio:latest
+    container_name: minio
+    restart: unless-stopped
+    command: ['server', '/data', '--console-address', ':9001']
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - '127.0.0.1:9000:9000'
+      - '127.0.0.1:9001:9001'
+    volumes:
+      - minio:/data
+    healthcheck:
+      test: ['CMD', 'mc', 'ready', 'local']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongodb:
+    name: mongodb-data
+  postgres:
+    name: postgres-data
+  redis:
+    name: redis-data
+  rabbitmq:
+    name: rabbitmq-data
+  minio:
+    name: minio-data

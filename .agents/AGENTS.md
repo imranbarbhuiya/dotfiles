@@ -87,6 +87,7 @@ RAM is tight (24 GB with Docker and an Android emulator running), so keep contai
 - Use the shared stack in `~/docker/local-dev` (`docker compose up -d` there; endpoints in its README) instead of starting Postgres, Redis, MongoDB, RabbitMQ or MinIO per project or worktree. Redis is on 6380. Give each project its own Postgres database and role, MongoDB database, Redis DB index or key prefix, RabbitMQ vhost and MinIO bucket. Only clear your own index (`FLUSHDB`, never `FLUSHALL`), and never drop another project's database.
 - Keep each project's connection pool small (about 5–10 locally) so all projects together stay under the shared Postgres's `max_connections`. On "too many connections" errors, shrink pools or end idle sessions instead of starting another container.
 - Give a project its own container only when it needs a different major version, an extension the shared one lacks (pgvector, PostGIS), Redis Cluster, or isolation the task requires. Say why when you do.
+- CPU is shared too: several agents usually run tests at once on 8 cores. Cap test workers (Jest and Vitest `--maxWorkers=2`; `bun test` without raising `--max-concurrency`) and run the files or project you changed rather than the whole suite, unless the task needs the full suite.
 - When a task finishes, `docker compose stop` the stacks you started (not `down -v`, which deletes data), and kill emulators you booted (`adb -s <serial> emu kill`). Leave running anything you didn't start.
 
 ## Screenshots in PRs

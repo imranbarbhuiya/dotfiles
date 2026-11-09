@@ -14,6 +14,17 @@ caller's checkout):
 - Never stash, reset, checkout or restore changes you didn't make.
 - I may have staged things myself, so include staged changes when checking what changed.
 
+## Agent accounts
+
+Which account or provider a subagent or delegate runs on is my call in the chat. Use what I said last in the current
+thread, and ask if I haven't said. Never save it to memory, docs or briefs as a standing rule.
+
+## Writing about other repos
+
+Never name my other repos, clients or reference apps, or their local paths, in commit messages, code comments, docs,
+plans or PR text, and don't say where an approach was borrowed from. Describe the behaviour neutrally ("the reference
+app"). Reading those repos is fine.
+
 ## Git worktrees
 
 Only create a worktree when it's actually needed. Prefer symlinking installed or generated dirs
@@ -58,6 +69,22 @@ Only re-resolve a lockfile when the task is a dependency change. Otherwise insta
 - Before branch operations or kubectl, name the repo and kube context you are acting on.
 - CI or deploy failures with DNS, TLS handshake, timeout or connection-reset errors are usually the network. Rerun once before changing code.
 - Before long device or simulator testing, check free memory and swap, that Metro and dev servers are alive, and that the backend is reachable. Say up front which platforms can realistically be verified.
+
+## Simulators, emulators and sound
+
+My Mac must stay quiet and usable while agents test:
+- Boot simulators headless and drive apps only with the device tools' taps and text entry into a focused field. No host
+  keystrokes or shortcuts, `osascript` keystrokes or `cliclick`.
+- Turn test users' sounds off first. Never start real calls, ringtones or media with audio; run web participants in
+  Playwright with `--mute-audio`, and verify call audio with tests and logs.
+- At most one simulator or emulator and one Metro per agent, shut down when done. If one dies unexpectedly, stop and
+  report; I may have stopped it, so don't relaunch in a loop.
+
+## Memory in T3 scratch folders
+
+A SessionStart hook links every T3 scratch folder's memory to one shared scratch memory, so notes saved there carry over
+to later scratch threads. Save only facts that outlive the thread there (servers, hosts, access paths); facts about a
+project go in that project's memory.
 
 ## Reporting verification
 

@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Merge the shared Claude settings into every local profile's settings.json.
+
+Shared keys from Claude/settings.json beside this script win, except PREFERENCES,
+which only fill a profile that doesn't set them. Nested objects merge key by key,
+so profile-only plugins, env vars and auto-mode rules stay. Hook groups from the
+shared file are added to each event without dropping a profile's own hooks.
+`--check` reports drift without writing.
+"""
+import json
+import sys
+from pathlib import Path
+
+PREFERENCES = {'model', 'theme'}
+SHARED = Path(__file__).resolve().parent.parent / 'settings.json'
+
+
+def merge(local, shared, path=()):
+    for key, value in shared.items():
+        here = path + (key,)
+        if here == ('hooks',):
+            hooks = local.setdefault('hooks', {})
+            for event, groups in value.items():
+                existing = hooks.setdefault(event, [])
+                existing.extend(g for g in groups if g not in existing)
+        elif len(here) == 1 and key in PREFERENCES:
+            local.setdefault(key, value)
+        elif isinstance(value, dict) and isinstance(local.get(key), dict):
+            merge(local[key], value, here)
+        else:
+            local[key] = value
+    return local
+
+
+def main():
+    check = sys.argv[1:] == ['--check']
+    if sys.argv[1:] not in ([], ['--check']):
+        print(__doc__.strip(), file=sys.stderr)
+        return 2
+    shared = json.loads(SHARED.read_text())
+    home = Path.home()
+    drift = 0
+    for profile in [home / '.claude'] + sorted(p for p in home.glob('.claude-*') if p.is_dir()):
+        file = profile / 'settings.json'
+        before = json.loads(file.read_text()) if file.exists() else {}
+        after = merge(json.loads(json.dumps(before)), shared)
+        if after == before:
+            print(f'{profile.name}: in sync')
+            continue
+        drift += 1
+        if check:
+            print(f'{profile.name}: DRIFT')
+        else:
+            file.write_text(json.dumps(after, indent=2, ensure_ascii=False) + '\n')
+            print(f'{profile.name}: updated')
+    return 1 if check and drift else 0
+
+
+sys.exit(main())

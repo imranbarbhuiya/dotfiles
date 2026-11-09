@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+"""Share Claude Code auto-memory between profiles and across T3 scratch folders.
+
+Profiles listed in ~/.config/claude-memory-sync/profiles (one config dir name per
+line, e.g. `.claude-work`) share one memory folder per project under
+~/.local/share/claude-memory/<project-key>. Each profile's
+projects/<project-key>/memory becomes a symlink to it.
+
+T3 scratch folders get a fresh project key per thread, so memory saved there is
+never loaded again. Their memory is linked to one shared scratch folder instead:
+~/.local/share/claude-memory/t3-scratch for listed profiles, and
+<profile>/scratch-memory for every other profile.
+
+Run with no arguments to sync every profile, `--check` to only report, or
+`--hook` as a SessionStart hook (reads the hook payload on stdin, never fails).
+"""
+import filecmp
+import json
+import os
+import re
+import shutil
+import sys
+from pathlib import Path
+
+HOME = Path.home()
+CONFIG = HOME / '.config/claude-memory-sync/profiles'
+STORE = HOME / '.local/share/claude-memory'
+SCRATCH_KEY = 't3-scratch'
+SCRATCH_MARK = '--t3-scratch-'
+INDEX = 'MEMORY.md'
+
+
+def synced_profiles():
+    if not CONFIG.is_file():
+        return []
+    names = [line.strip() for line in CONFIG.read_text().splitlines()]
+    return [HOME / n for n in names if n and not n.startswith('#') and (HOME / n).is_dir()]
+
+
+def all_profiles():
+    return [HOME / '.claude'] + sorted(p for p in HOME.glob('.claude-*') if p.is_dir())
+
+
+def target_for(profile, key, synced):
+    scratch = SCRATCH_MARK in key
+    if profile in synced:
+        return STORE / (SCRATCH_KEY if scratch else key)
+    return profile / 'scratch-memory' if scratch else None
+
+
+def merge_index(src, dst):
+    lines = dst.read_text().splitlines() if dst.exists() else []
+    for line in src.read_text().splitlines():
+        if line.strip() and line not in lines:
+            lines.append(line)
+    dst.write_text('\n'.join(line for line in lines if line.strip()) + '\n')
+
+
+def merge_into(src, dst, report):
+    """Move src's files into dst. Returns True when src ended up empty."""
+    dst.mkdir(parents=True, exist_ok=True)
+    clean = True
+    for item in sorted(src.iterdir()):
+        if item.name == '.DS_Store':
+            item.unlink()
+            continue
+        out = dst / item.name
+        if item.name == INDEX:
+            merge_index(item, out)
+            item.unlink()
+        elif not out.exists():
+            shutil.move(str(item), str(out))
+        elif item.is_file() and filecmp.cmp(item, out, shallow=False):
+            item.unlink()
+        else:
+            report(f'CONFLICT: {item} differs from {out} (left in place)')
+            clean = False
+    return clean
+
+
+def link(memory, target, report, check):
+    """Point memory at target. Returns True when a new link was made."""
+    if memory.is_symlink():
+        if memory.resolve() == target.resolve():
+            return False
+        if check:
+            report(f'RELINK: {memory} -> {target}')
+            return False
+        old = memory.resolve()
+        memory.unlink()
+        if old.is_dir() and old != target.resolve() and not old.is_relative_to(STORE):
+            merge_into(old, target, report)
+    elif memory.is_dir():
+        if check:
+            report(f'MERGE: {memory} -> {target}')
+            return False
+        if not merge_into(memory, target, report):
+            return False
+        memory.rmdir()
+    elif check:
+        report(f'LINK: {memory} -> {target}')
+        return False
+    target.mkdir(parents=True, exist_ok=True)
+    memory.parent.mkdir(parents=True, exist_ok=True)
+    memory.symlink_to(target)
+    return True
+
+
+def sync(check, report):
+    synced = synced_profiles()
+    for profile in all_profiles():
+        for memory in sorted((profile / 'projects').glob('*/memory')):
+            target = target_for(profile, memory.parent.name, synced)
+            if target is not None:
+                link(memory, target, report, check)
+    if STORE.is_dir():
+        for shared in sorted(STORE.iterdir()):
+            if shared.name == SCRATCH_KEY or not shared.is_dir():
+                continue
+            for profile in synced:
+                memory = profile / 'projects' / shared.name / 'memory'
+                if not memory.exists() and not memory.is_symlink():
+                    link(memory, shared, report, check)
+
+
+def project_key(cwd):
+    return re.sub(r'[^A-Za-z0-9]', '-', cwd)
+
+
+def hook():
+    payload = json.load(sys.stdin)
+    profile = Path(os.environ.get('CLAUDE_CONFIG_DIR') or HOME / '.claude').expanduser()
+    messages = []
+    sync(False, messages.append)
+    cwd = payload.get('cwd') or os.getcwd()
+    key = project_key(os.path.realpath(cwd))
+    target = target_for(profile, key, synced_profiles())
+    if target is None or len(key) > 200:
+        return
+    memory = profile / 'projects' / key / 'memory'
+    if link(memory, target, messages.append, False) and (target / INDEX).is_file():
+        print(f'This folder\'s memory directory was just linked to {target}, so its index was not '
+              f'loaded this session. Current index:\n\n{(target / INDEX).read_text()}')
+
+
+def main():
+    args = sys.argv[1:]
+    if args == ['--hook']:
+        try:
+            hook()
+        except Exception as error:
+            print(f'memory-sync: {error}', file=sys.stderr)
+        return 0
+    if args not in ([], ['--check']):
+        print(__doc__.strip(), file=sys.stderr)
+        return 2
+    issues = []
+    sync(args == ['--check'], lambda m: (issues.append(m), print(m)))
+    print(f'{len(synced_profiles())} synced profiles, store {STORE}, {len(issues)} issue(s)')
+    return 1 if any(m.startswith('CONFLICT') for m in issues) else 0
+
+
+sys.exit(main())

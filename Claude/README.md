@@ -10,6 +10,8 @@ intentionally excluded.
 - `settings.json` — shared defaults: Concise output, extended-context Opus, fullscreen TUI, local Figma/context-bar plugins, Remote Control off at startup, and no claude.ai skill/plugin sync or connectors
 - `bin/skills-sync` — link shared skills into every local Claude profile
 - `bin/skills-doctor` — inspect missing skills, conflicts, invalid skills, and stale links without changing files
+- `bin/settings-sync` — merge the shared `settings.json` into every local profile's settings
+- `bin/memory-sync` (also `hooks/memory-sync`) — share auto-memory between chosen profiles and keep T3 scratch-folder memory
 - `hooks/guard-bash` — PreToolUse hook that blocks `--no-verify` on git commit/push/merge/rebase unless prefixed with `ALLOW_NO_VERIFY=1`, and `git worktree remove` on a worktree with uncommitted work (untracked symlinks such as a linked `node_modules` are ignored)
 
 
@@ -68,8 +70,51 @@ ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-personal/hooks"
 ln -sfn "$HOME/.claude/hooks" "$HOME/.claude-work/hooks"
 ```
 
-For existing profiles, merge the `hooks.PreToolUse` entry from `settings.json`
-into each profile's settings.
+For existing profiles, run `settings-sync` (below) to add the hook entries.
+
+## Shared settings
+
+Install the command, then run it after editing `settings.json` or creating a profile:
+
+```sh
+ln -sf "$PWD/Claude/bin/settings-sync" "$HOME/.local/bin/settings-sync"
+settings-sync --check   # report drift, exit 1 if any
+settings-sync           # write
+```
+
+It merges the shared file into `~/.claude/settings.json` and every existing
+`~/.claude-*/settings.json`. Shared keys win, except `model` and `theme`, which only
+fill a profile that doesn't set them. Nested objects merge key by key, so a profile's
+own plugins, `env` and auto-mode rules stay, and shared hook groups are added without
+removing a profile's own hooks.
+
+## Shared memory
+
+Claude Code keeps auto-memory per profile under `projects/<project-key>/memory`, so
+two profiles working on the same repo each remember different things. `memory-sync`
+moves the memory of the profiles you list into one folder per project,
+`~/.local/share/claude-memory/<project-key>`, and links each profile's memory folder to it.
+
+T3 scratch folders get a new project key every thread, so memory saved there is never
+read again. Their memory folders are linked to one shared scratch memory instead:
+`~/.local/share/claude-memory/t3-scratch` for listed profiles, `<profile>/scratch-memory`
+for the rest.
+
+List the profiles to share, one config directory name per line (kept out of this repo):
+
+```sh
+mkdir -p ~/.config/claude-memory-sync
+printf '.claude-personal\n.claude-work\n' > ~/.config/claude-memory-sync/profiles
+ln -sf "$PWD/Claude/bin/memory-sync" "$HOME/.local/bin/memory-sync"
+memory-sync --check   # show what would move
+memory-sync
+```
+
+Files that differ between profiles are reported as conflicts and left in place;
+`MEMORY.md` indexes are merged line by line. `settings.json` also runs
+`memory-sync --hook` at SessionStart, which syncs again and links a new folder's memory.
+A newly linked folder's index isn't loaded in that first session, so the hook prints it
+into the session context.
 
 ## Concise output
 

@@ -24,9 +24,16 @@ docker compose down       # stop (data survives)
 | — mgmt   | `15672`       | `dev` / `dev`           | http://localhost:15672         |
 | MinIO    | `9000`        | `minioadmin` / same     | S3 API, `cgr.dev/chainguard/minio` |
 | — console| `9001`        | `minioadmin` / same     | http://localhost:9001          |
+| Mailpit  | `1025` (SMTP) | any user/pass, no TLS   | catches all mail, keeps 5000   |
+| — web UI | `8025`        | none                    | http://localhost:8025          |
 
 **Redis is on 6380, not 6379.** 6379 is often taken by a `kubectl port-forward` to a remote Redis.
 Anything on `localhost:6379` that wants a password is that remote instance, not this one.
+
+## Mail
+
+Point every project's SMTP at `localhost:1025`; nothing is delivered for real. Add an
+`X-Tags: <project>` header so each project's mail can be filtered in the UI (`tag:<project>`).
 
 ## Version ceilings
 

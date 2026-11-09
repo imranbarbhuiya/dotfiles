@@ -96,6 +96,26 @@ services:
       timeout: 10s
       retries: 3
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_MAX_MESSAGES: 5000
+      MP_SMTP_AUTH_ACCEPT_ANY: 'true'
+      MP_SMTP_AUTH_ALLOW_INSECURE: 'true'
+    ports:
+      - '127.0.0.1:1025:1025'
+      - '127.0.0.1:8025:8025'
+    volumes:
+      - mailpit:/data
+    healthcheck:
+      test: ['CMD', '/mailpit', 'readyz']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
 volumes:
   mongodb:
     name: mongodb-data
@@ -107,3 +127,5 @@ volumes:
     name: rabbitmq-data
   minio:
     name: minio-data
+  mailpit:
+    name: mailpit-data

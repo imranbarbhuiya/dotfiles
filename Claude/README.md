@@ -100,6 +100,10 @@ read again. Their memory folders are linked to one shared scratch memory instead
 `~/.local/share/claude-memory/t3-scratch` for listed profiles, `<profile>/scratch-memory`
 for the rest.
 
+Git worktrees need nothing extra: Claude Code already keeps a worktree's memory under its
+main checkout's project key, so the hook links that key and removes the empty folders it
+used to create for each worktree.
+
 List the profiles to share, one config directory name per line (kept out of this repo):
 
 ```sh

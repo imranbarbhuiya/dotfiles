@@ -6,7 +6,7 @@ A dark theme for T3 Code with a periwinkle accent and a hand-drawn aurora night 
 
 ![Nightfall background](art/preview.jpg)
 
-- `themes/nightfall.json`: colors, light variant and custom CSS (glass header and composer, twinkling stars, drifting aurora glow, styled markdown, selected-thread pill). Motion stops when Reduce Motion is on.
+- `themes/nightfall.json`: colors, light variant and custom CSS (glass header and composer, styled markdown, selected-thread pill).
 - `themes/nightfall.webp`: the chat background, rendered from the SVG.
 - `art/gen.py`: generates `art/nightfall.svg` (stars, aurora, moon, mountains, pines, lake reflection).
 - `art/render.js`: renders an SVG to PNG with Playwright's Chromium.

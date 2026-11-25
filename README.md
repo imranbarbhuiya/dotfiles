@@ -33,6 +33,7 @@ Personal shell, editor, terminal, Git, and development-tool configuration.
 | `vscode-settings.json` | Cursor / VS Code editor and terminal settings |
 | `vscode-keybindings.json` | Cursor / VS Code keybindings |
 | `docker/local-dev/` | Shared local Postgres, Redis, MongoDB, RabbitMQ, and MinIO for every project |
+| `t3code/` | T3 Code Nightfall theme, background image and the script that draws it |
 | `Claude/` | Shared Claude Code defaults, global instructions, launchers, and skill sync/doctor commands |
 | `PowerShell/` | Windows PowerShell setup |
 | `Windows-Terminal/` | Windows Terminal configuration |
